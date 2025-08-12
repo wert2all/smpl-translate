@@ -1,3 +1,6 @@
-.translate-container {
-  color: red;
+@use './../../css/variables.scss' as *;
+
+.translate_containter {
+  background-color: $container-bg-color;
+  color: $container-text-color;
 }

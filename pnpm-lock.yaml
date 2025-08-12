@@ -26,6 +26,15 @@ importers:
       '@angular/router':
         specifier: ^20.1.0
         version: 20.1.6(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(@angular/platform-browser@20.1.6(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)))(rxjs@7.8.2)
+      '@ng-icons/core':
+        specifier: ^32.1.0
+        version: 32.1.0(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@ng-icons/flag-icons':
+        specifier: ^32.1.0
+        version: 32.1.0
+      '@ng-icons/phosphor-icons':
+        specifier: ^32.1.0
+        version: 32.1.0
       '@tailwindcss/postcss':
         specifier: ^4.1.11
         version: 4.1.11
@@ -1075,6 +1084,19 @@ packages:
   '@napi-rs/nice@1.0.4':
     resolution: {integrity: sha512-Sqih1YARrmMoHlXGgI9JrrgkzxcaaEso0AH+Y7j8NHonUs+xe4iDsgC3IBIDNdzEewbNpccNN6hip+b5vmyRLw==}
     engines: {node: '>= 10'}
+
+  '@ng-icons/core@32.1.0':
+    resolution: {integrity: sha512-QMZSJIZYFg6THQKL9cQDEf7IbBcALcM09wCBmlIf0slmozRWcNJR25T9huiXy9/15OH1APegaRW+606e9bsOIg==}
+    peerDependencies:
+      '@angular/common': '>=20.0.0'
+      '@angular/core': '>=20.0.0'
+      rxjs: ^6.5.3 || ^7.4.0
+
+  '@ng-icons/flag-icons@32.1.0':
+    resolution: {integrity: sha512-tNbligP9O/Zb6KRjloVqzLf4xLc6vfzEYm4stcVo5tknHIm+J4a6X6+8l2LDZYfeSVhk6ufEroznxjbiCeB67g==}
+
+  '@ng-icons/phosphor-icons@32.1.0':
+    resolution: {integrity: sha512-2/XKS6zOSCcurCt/EGe+U1Y6i4Npyawsx4iul+5S75Tj4yYo7OYafVxWnxovqY9vMZ/BMb2UbQ3O25n6WlJkuA==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -5140,6 +5162,21 @@ snapshots:
       '@napi-rs/nice-win32-ia32-msvc': 1.0.4
       '@napi-rs/nice-win32-x64-msvc': 1.0.4
     optional: true
+
+  '@ng-icons/core@32.1.0(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)':
+    dependencies:
+      '@angular/common': 20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@angular/core': 20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)
+      rxjs: 7.8.2
+      tslib: 2.8.1
+
+  '@ng-icons/flag-icons@32.1.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@ng-icons/phosphor-icons@32.1.0':
+    dependencies:
+      tslib: 2.8.1
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
