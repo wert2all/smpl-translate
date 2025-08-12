@@ -1,0 +1,6 @@
+@use './../../../css/variables.scss' as *;
+
+kbd {
+  background-color: $background-color;
+  color: $text-accent-color;
+}
