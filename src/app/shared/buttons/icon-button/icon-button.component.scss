@@ -1,0 +1,6 @@
+@use './../../../../css/variables.scss' as *;
+.btn {
+  &:hover {
+    background-color: $background-color;
+  }
+}
