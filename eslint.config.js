@@ -1,15 +1,15 @@
-import eslint from "@eslint/js";
-import angular from "angular-eslint";
-import eslintConfigPrettier from "eslint-config-prettier";
-import sonarjs from "eslint-plugin-sonarjs";
-import eslintPluginUnicorn from "eslint-plugin-unicorn";
-import tseslint from "typescript-eslint";
-import unusedImports from "eslint-plugin-unused-imports";
+import eslint from '@eslint/js';
+import angular from 'angular-eslint';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import sonarjs from 'eslint-plugin-sonarjs';
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
+import unusedImports from 'eslint-plugin-unused-imports';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    files: ["**/*.ts"],
-    ignores: ["**/graphql.ts"],
+    files: ['**/*.ts'],
+    ignores: ['**/graphql.ts'],
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
@@ -18,37 +18,37 @@ export default tseslint.config(
     ],
     plugins: {
       sonarjs,
-      "unused-imports": unusedImports,
+      'unused-imports': unusedImports,
       unicorn: eslintPluginUnicorn,
     },
     processor: angular.processInlineTemplates,
     rules: {
       ...sonarjs.configs.recommended.rules,
-      "@angular-eslint/directive-selector": [
-        "error",
+      '@angular-eslint/directive-selector': [
+        'error',
         {
-          type: "attribute",
-          prefix: "app",
-          style: "camelCase",
+          type: 'attribute',
+          prefix: 'app',
+          style: 'camelCase',
         },
       ],
-      "@angular-eslint/component-selector": [
-        "error",
+      '@angular-eslint/component-selector': [
+        'error',
         {
-          type: "element",
-          prefix: "app",
-          style: "kebab-case",
+          type: 'element',
+          prefix: 'app',
+          style: 'kebab-case',
         },
       ],
     },
   },
   {
-    files: ["**/*.html"],
+    files: ['**/*.html'],
     extends: [
       ...angular.configs.templateRecommended,
       ...angular.configs.templateAccessibility,
     ],
     rules: {},
   },
-  eslintConfigPrettier,
+  eslintConfigPrettier
 );

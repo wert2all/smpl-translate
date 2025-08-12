@@ -3,7 +3,7 @@ name: Deployment
 on:
   push:
     tags:
-      - "*"
+      - '*'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Restore cached npm dependencies
         uses: actions/cache/restore@v3
