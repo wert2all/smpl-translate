@@ -1,10 +1,16 @@
-<div
-  class="language-switcher text-md flex items-center justify-between border-1 p-4">
-  <div class="flex items-center space-x-4">
-    <app-icon-button icon="flagUaSquare"></app-icon-button>
-    <span class="cursor-pointer">ukrainian</span>
-    <app-icon-button icon="phosphorArrowsLeftRightLight"></app-icon-button>
-    <span class="cursor-pointer">english</span>
-    <app-icon-button icon="flagGbSquare"></app-icon-button>
-  </div>
+<div class="language-switcher flex items-center justify-between border-1 p-4">
+  @if (isDefinedLanguage()) {
+    <div class="flex items-center space-x-4">
+      <app-icon-button icon="flagUaSquare"></app-icon-button>
+      <span class="cursor-pointer">ukrainian</span>
+      <app-icon-button icon="phosphorArrowsLeftRightLight"></app-icon-button>
+      <span class="cursor-pointer">english</span>
+      <app-icon-button icon="flagGbSquare"></app-icon-button>
+    </div>
+  } @else {
+    <div class="flex items-center space-x-4">
+      <app-icon-button icon="phosphorAlienLight"></app-icon-button>
+      <span>will detect language</span>
+    </div>
+  }
 </div>
