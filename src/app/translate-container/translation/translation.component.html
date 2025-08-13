@@ -4,6 +4,9 @@
 </app-shared-title>
 <app-shared-divider />
 <app-shared-spacer />
-<div class="container" [style]="heightStyle()">
+<div class="relative container pb-8" [style]="heightStyle()">
   {{ translated() }}
+  <app-icon-button
+    class="absolute right-2 bottom-2 m-1"
+    icon="phosphorClipboardTextLight" />
 </div>
