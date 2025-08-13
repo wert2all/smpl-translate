@@ -2,4 +2,7 @@
 
 textarea {
   caret-color: $caret-color;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $caret-color $background-color;
 }

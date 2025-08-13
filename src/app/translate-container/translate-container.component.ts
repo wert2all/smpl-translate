@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { dumpInput } from '../shared/dump.types';
 import { SpacerComponent } from '../shared/spacer/spacer.component';
-import { TextareaComponent } from '../shared/textarea/textarea.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { InputContainerComponent } from './input-container/input-container.component';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
@@ -15,8 +15,9 @@ import { TranslationComponent } from './translation/translation.component';
     BottomBarComponent,
     TranslationComponent,
     SpacerComponent,
-    TextareaComponent,
     InputContainerComponent,
   ],
 })
-export class TranslateContainerComponent {}
+export class TranslateContainerComponent {
+  protected inputString = signal(dumpInput);
+}
