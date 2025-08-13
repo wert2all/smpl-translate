@@ -1,4 +1,5 @@
 import { Component, HostListener, inject } from '@angular/core';
+import { MappingService } from './services/mapping.service';
 import { ModeService } from './services/mode.service';
 import { Mode } from './shared/shared.types';
 import { TranslateContainerComponent } from './translate-container/translate-container.component';
@@ -10,6 +11,7 @@ import { TranslateContainerComponent } from './translate-container/translate-con
 })
 export class App {
   private modeService = inject(ModeService);
+  private mappingService = inject(MappingService);
 
   @HostListener('document:keydown.escape')
   handleKeyboardEvent() {
@@ -20,5 +22,10 @@ export class App {
   translate(e: Event) {
     e.preventDefault();
     console.log('translate');
+  }
+
+  @HostListener('document:keydown', ['$event.key'])
+  onSpacePress(key: string) {
+    this.mappingService.pressKey(key);
   }
 }

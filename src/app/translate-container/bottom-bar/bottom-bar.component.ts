@@ -1,6 +1,8 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MappingService } from '../../services/mapping.service';
 import { KbdComponent } from '../../shared/kbd/kbd.component';
-import { Mode } from '../../shared/shared.types';
+import { Mapping, Mode } from '../../shared/shared.types';
 import { ModeComponent } from '../mode/mode.component';
 
 @Component({
@@ -10,4 +12,14 @@ import { ModeComponent } from '../mode/mode.component';
 })
 export class BottomBarComponent {
   mode = input.required<Mode>();
+
+  mappings = signal<Mapping[]>([]);
+
+  constructor() {
+    inject(MappingService)
+      .activeMenu.pipe(takeUntilDestroyed())
+      .subscribe(mappings => {
+        this.mappings.set(mappings);
+      });
+  }
 }
