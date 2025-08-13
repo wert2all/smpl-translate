@@ -4,7 +4,7 @@ import { ModeService } from '../services/mode.service';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { LoaderComponent } from '../shared/loader/loader.component';
 import {
-  createLoadingState,
+  createInitialState,
   Language,
   Mode,
   State,
@@ -38,7 +38,7 @@ export class TranslateContainerComponent {
     initialValue: Mode.insert,
   });
 
-  protected translateState = computed((): State => createLoadingState());
+  protected translateState = computed((): State => createInitialState());
   protected fromLanguage = computed(() => Language.en);
   protected toLanguage = computed(() => Language.ua);
 
