@@ -6,7 +6,7 @@ import {
   phosphorArrowsLeftRightLight,
 } from '@ng-icons/phosphor-icons/light';
 import { IconButtonComponent } from '../../shared/buttons/icon-button/icon-button.component';
-import { Language } from '../../shared/shared.types';
+import { LanguageCode } from '../../shared/shared.types';
 
 @Component({
   selector: 'app-language-switcher',
@@ -23,8 +23,8 @@ import { Language } from '../../shared/shared.types';
   ],
 })
 export class LanguageSwitcherComponent {
-  maybeFromLanguage = input<Language>();
-  maybeToLanguage = input<Language>();
+  maybeFromLanguage = input<LanguageCode>();
+  maybeToLanguage = input<LanguageCode>();
 
   protected isDefinedLanguage = computed(
     () => this.maybeFromLanguage() && this.maybeToLanguage()

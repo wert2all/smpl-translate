@@ -1,7 +1,14 @@
-export enum Language {
+export enum LanguageCode {
   ua = 'ua',
   en = 'en',
 }
+
+export interface Language {
+  code: LanguageCode;
+  name: string;
+  flag: string;
+}
+
 export enum Mode {
   normal = 'normal',
   insert = 'insert',

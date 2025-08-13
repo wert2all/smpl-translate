@@ -5,7 +5,7 @@ import { AlertComponent } from '../shared/alert/alert.component';
 import { LoaderComponent } from '../shared/loader/loader.component';
 import {
   createInitialState,
-  Language,
+  LanguageCode,
   Mode,
   State,
 } from '../shared/shared.types';
@@ -39,8 +39,8 @@ export class TranslateContainerComponent {
   });
 
   protected translateState = computed((): State => createInitialState());
-  protected fromLanguage = computed(() => Language.en);
-  protected toLanguage = computed(() => Language.ua);
+  protected fromLanguage = computed(() => LanguageCode.en);
+  protected toLanguage = computed(() => LanguageCode.ua);
 
   protected loading = computed(() => this.translateState().type == 'loading');
 
