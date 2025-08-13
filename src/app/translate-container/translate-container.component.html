@@ -6,7 +6,9 @@
     [inputString]="inputString()"
     (changeHeight)="changeHeight($event)" />
   <app-shared-spacer multiplexor="2" />
-  <app-translation [translated]="translatedString()"></app-translation>
+  <app-translation
+    [translated]="translatedString()"
+    [updatedHeight]="height()" />
   <app-shared-spacer multiplexor="2" />
   <app-bottom-bar />
 </div>
