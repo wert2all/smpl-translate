@@ -1,0 +1,5 @@
+@use './../../../css/variables.scss' as *;
+
+textarea {
+  caret-color: $caret-color;
+}
