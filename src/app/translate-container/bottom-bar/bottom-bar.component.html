@@ -3,9 +3,12 @@
     <app-translate-mode [mode]="mode()"></app-translate-mode>
   </div>
   <div>
-    <app-shared-kbd key="esc" /> - normal mode
-    <app-shared-kbd key="Ctrl"></app-shared-kbd>
-    <span class="me-2"></span>
-    <app-shared-kbd key="s"></app-shared-kbd> - translate
+    @for (mapping of mappings(); track $index) {
+      @for (key of mapping.keys; track $index) {
+        <app-shared-kbd [key]="key"></app-shared-kbd>
+        <span class="me-2"></span>
+      }
+      {{ mapping.description }}
+    }
   </div>
 </div>

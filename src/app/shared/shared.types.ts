@@ -15,6 +15,44 @@ export enum Mode {
   visual = 'visual',
 }
 
+export interface Mapping {
+  keys: string[];
+  description: string;
+  action?: () => void;
+  mapping?: Mapping[];
+}
+export const MODIFIER_KEYS = new Set([
+  'Control',
+  'Alt',
+  'Shift',
+  'Meta',
+  'CapsLock',
+  'NumLock',
+  'Home',
+  'End',
+  'PageUp',
+  'PageDown',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'Insert',
+  'Delete',
+  'Backspace',
+  'Tab',
+  'F1',
+  'F2',
+  'F3',
+  'F4',
+  'F5',
+  'F6',
+  'F7',
+  'F8',
+  'F9',
+  'F10',
+  'F11',
+]);
+
 export interface TextAreaSize {
   width: number;
   height: number;
