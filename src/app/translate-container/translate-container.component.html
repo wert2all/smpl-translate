@@ -6,7 +6,9 @@
   <app-shared-spacer />
   <app-input-container
     [inputString]="inputString()"
-    (changeHeight)="height.set($event)" />
+    (changeHeight)="height.set($event)"
+    (unFocus)="unFocus()"
+    (typed)="onFocus()" />
   <app-shared-spacer multiplexor="2" />
   @if (loading()) {
     <app-shared-loader />

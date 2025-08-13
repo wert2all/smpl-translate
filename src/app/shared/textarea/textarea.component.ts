@@ -16,6 +16,7 @@ export class TextareaComponent {
 
   changeHeight = output<number>();
   unFocus = output<void>();
+  typed = output<void>();
 
   resizeEvent(size: TextAreaSize) {
     this.changeHeight.emit(size.height);

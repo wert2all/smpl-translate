@@ -7,4 +7,8 @@ import { Mode } from '../shared/shared.types';
 })
 export class ModeService {
   mode = new BehaviorSubject<Mode>(Mode.insert);
+
+  update(mode: Mode) {
+    this.mode.next(mode);
+  }
 }

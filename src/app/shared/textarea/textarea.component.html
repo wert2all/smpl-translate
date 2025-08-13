@@ -4,5 +4,6 @@
   [rows]="rows()"
   (resized)="resizeEvent($event)"
   (focusout)="unFocus.emit()"
+  (focus)="typed.emit()"
   >{{ text() }}</textarea
 >
