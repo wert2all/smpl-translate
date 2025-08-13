@@ -2,6 +2,11 @@ export enum Language {
   ua = 'ua',
   en = 'en',
 }
+export enum Mode {
+  normal = 'normal',
+  insert = 'insert',
+  visual = 'visual',
+}
 
 export interface TextAreaSize {
   width: number;
