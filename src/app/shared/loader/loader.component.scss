@@ -1,5 +1,7 @@
 @use './../../../css/variables.scss' as *;
 div {
+  border-color: $border-color;
+
   .cursor {
     display: inline-block;
     width: 0.7rem;
