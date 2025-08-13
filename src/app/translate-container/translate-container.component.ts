@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { dumpInput } from '../shared/dump.types';
 import { SpacerComponent } from '../shared/spacer/spacer.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
@@ -20,4 +20,5 @@ import { TranslationComponent } from './translation/translation.component';
 })
 export class TranslateContainerComponent {
   protected inputString = signal(dumpInput);
+  protected translatedString = computed(() => this.inputString());
 }
