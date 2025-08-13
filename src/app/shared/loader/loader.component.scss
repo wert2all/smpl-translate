@@ -1,0 +1,22 @@
+@use './../../../css/variables.scss' as *;
+div {
+  .cursor {
+    display: inline-block;
+    width: 0.7rem;
+    height: 1.5rem;
+    margin-left: 0.5rem;
+    background-color: $text-color;
+
+    animation: blink 1s infinite step-end;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
