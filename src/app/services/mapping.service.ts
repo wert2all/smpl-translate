@@ -41,6 +41,20 @@ export class MappingService {
                   console.log('switch language');
                 },
               },
+              {
+                keys: ['f'],
+                description: 'change from language',
+                action: () => {
+                  console.log('change from language');
+                },
+              },
+              {
+                keys: ['t'],
+                description: 'change to language',
+                action: () => {
+                  console.log('change to language');
+                },
+              },
             ],
           },
         ],
