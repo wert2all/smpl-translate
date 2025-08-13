@@ -1,4 +1,6 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ModeService } from '../services/mode.service';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { LoaderComponent } from '../shared/loader/loader.component';
 import {
@@ -28,9 +30,13 @@ import { TranslationComponent } from './translation/translation.component';
   ],
 })
 export class TranslateContainerComponent {
+  private modeService = inject(ModeService);
+
   protected inputString = signal('');
   protected height = signal<number | null>(null);
-  protected mode = Mode.normal;
+  protected mode = toSignal(this.modeService.mode, {
+    initialValue: Mode.insert,
+  });
 
   protected translateState = computed((): State => createLoadingState());
   protected fromLanguage = computed(() => Language.en);
