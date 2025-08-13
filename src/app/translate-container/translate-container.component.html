@@ -2,7 +2,7 @@
   class="translate_containter w-full max-w-5xl p-8 pb-6 text-gray-500 shadow-2xl">
   <app-language-switcher />
   <app-shared-spacer />
-  <app-input-container />
+  <app-input-container [inputString]="inputString()" />
   <app-shared-spacer multiplexor="2" />
   <app-translation></app-translation>
   <app-bottom-bar />
