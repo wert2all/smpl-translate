@@ -1,4 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
+import { ModeService } from './services/mode.service';
+import { Mode } from './shared/shared.types';
 import { TranslateContainerComponent } from './translate-container/translate-container.component';
 
 @Component({
@@ -7,9 +9,11 @@ import { TranslateContainerComponent } from './translate-container/translate-con
   imports: [TranslateContainerComponent],
 })
 export class App {
+  private modeService = inject(ModeService);
+
   @HostListener('document:keydown.escape')
   handleKeyboardEvent() {
-    console.log('swich to normal mode');
+    this.modeService.update(Mode.normal);
   }
 
   @HostListener('document:keydown.control.s', ['$event'])
