@@ -1,4 +1,10 @@
-import { Component, input, output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  input,
+  output,
+  ViewChild,
+} from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { phosphorArrowCircleDownRightLight } from '@ng-icons/phosphor-icons/light';
 import { IconButtonComponent } from '../../shared/buttons/icon-button/icon-button.component';
@@ -10,8 +16,13 @@ import { TextareaComponent } from '../../shared/textarea/textarea.component';
   imports: [TextareaComponent, IconButtonComponent],
   viewProviders: [provideIcons({ phosphorArrowCircleDownRightLight })],
 })
-export class InputContainerComponent {
-  inputString = input<string>();
+export class InputContainerComponent implements AfterViewInit {
+  @ViewChild(TextareaComponent) textarea!: TextareaComponent;
 
+  inputString = input<string>();
   changeHeight = output<number>();
+
+  ngAfterViewInit() {
+    this.textarea.focus();
+  }
 }
