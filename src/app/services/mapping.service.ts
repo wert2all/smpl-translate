@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, filter, map, Subject, withLatestFrom } from 'rxjs';
+import { MappingFactory } from '../factories/mapping.factory';
 import { Mapping, Mode, MODIFIER_KEYS } from '../shared/shared.types';
 import { ModeService } from './mode.service';
 
@@ -11,57 +12,8 @@ export class MappingService {
   activeMenu = new BehaviorSubject<Mapping[]>([]);
 
   private modeService = inject(ModeService);
-  private allMappings: Record<Mode, Mapping[]> = {
-    [Mode.insert]: [
-      {
-        keys: ['esc'],
-        description: 'normal mode',
-      },
-      {
-        keys: ['ctrl', 's'],
-        description: 'translate',
-        action: () => {
-          console.log('translate');
-        },
-      },
-    ],
-    [Mode.normal]: [
-      {
-        keys: ['space'],
-        description: 'menu',
-        mapping: [
-          {
-            keys: ['l'],
-            description: 'language',
-            mapping: [
-              {
-                keys: ['s'],
-                description: 'switch language',
-                action: () => {
-                  console.log('switch language');
-                },
-              },
-              {
-                keys: ['f'],
-                description: 'change from language',
-                action: () => {
-                  console.log('change from language');
-                },
-              },
-              {
-                keys: ['t'],
-                description: 'change to language',
-                action: () => {
-                  console.log('change to language');
-                },
-              },
-            ],
-          },
-        ],
-      },
-    ],
-    [Mode.visual]: [],
-  };
+  private allMappings = inject(MappingFactory).createMapping();
+
   private keyPressed = new Subject<string>();
   private selectMenuData = this.keyPressed.pipe(
     filter(key => !MODIFIER_KEYS.has(key)),
@@ -79,22 +31,26 @@ export class MappingService {
     this.selectMenuData
       .pipe(takeUntilDestroyed())
       .subscribe(({ key, activeMenu, mode }) => {
-        const nextMenu = activeMenu.find(mapping => mapping.keys[0] == key);
-
-        if (nextMenu && nextMenu.mapping) {
-          this.activeMenu.next(nextMenu.mapping);
-          return;
-        }
-        if (nextMenu && nextMenu.action) {
-          nextMenu.action();
-        }
-
-        this.resetMenu(mode);
+        this.updateActiveMenu(key, activeMenu, mode);
       });
   }
 
   pressKey(code: string) {
     this.keyPressed.next(code);
+  }
+
+  private updateActiveMenu(key: string, activeMenu: Mapping[], mode: Mode) {
+    const nextMenu = activeMenu.find(mapping => mapping.keys[0] == key);
+
+    if (nextMenu && nextMenu.mapping) {
+      this.activeMenu.next(nextMenu.mapping);
+      return;
+    }
+    if (nextMenu && nextMenu.action) {
+      nextMenu.action();
+    }
+
+    this.resetMenu(mode);
   }
 
   private resetMenu(mode: Mode) {
