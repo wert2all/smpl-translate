@@ -1,5 +1,7 @@
 <div class="relative">
-  <app-shared-textarea [text]="inputString()" />
+  <app-shared-textarea
+    [text]="inputString()"
+    (changeHeight)="changeHeight.emit($event)" />
   <app-icon-button
     class="absolute right-0 bottom-0 m-1"
     icon="phosphorArrowCircleDownRightLight" />

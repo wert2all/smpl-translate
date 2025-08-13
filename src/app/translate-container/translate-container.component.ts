@@ -21,4 +21,9 @@ import { TranslationComponent } from './translation/translation.component';
 export class TranslateContainerComponent {
   protected inputString = signal(dumpInput);
   protected translatedString = computed(() => this.inputString());
+  protected height = signal<number | null>(null);
+
+  changeHeight(height: number) {
+    this.height.set(height);
+  }
 }
