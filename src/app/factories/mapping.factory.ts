@@ -1,4 +1,10 @@
 import { Injectable } from '@angular/core';
+import {
+  ChangeFromLanguage,
+  ChangeToLanguage,
+  SwitchLanguage,
+  Translate,
+} from '../shared/shared.actions';
 import { Mapping, Mode } from '../shared/shared.types';
 
 @Injectable({
@@ -15,9 +21,7 @@ export class MappingFactory {
         {
           keys: ['ctrl', 's'],
           description: 'translate',
-          action: () => {
-            console.log('translate');
-          },
+          action: Translate,
         },
       ],
       [Mode.normal]: [
@@ -32,23 +36,17 @@ export class MappingFactory {
                 {
                   keys: ['s'],
                   description: 'switch language',
-                  action: () => {
-                    console.log('switch language');
-                  },
+                  action: SwitchLanguage,
                 },
                 {
                   keys: ['f'],
                   description: 'change from language',
-                  action: () => {
-                    console.log('change from language');
-                  },
+                  action: ChangeFromLanguage,
                 },
                 {
                   keys: ['t'],
                   description: 'change to language',
-                  action: () => {
-                    console.log('change to language');
-                  },
+                  action: ChangeToLanguage,
                 },
               ],
             },
