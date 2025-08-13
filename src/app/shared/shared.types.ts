@@ -15,12 +15,15 @@ export enum Mode {
   visual = 'visual',
 }
 
+export type Action = () => void;
+
 export interface Mapping {
   keys: string[];
   description: string;
-  action?: () => void;
+  action?: Action;
   mapping?: Mapping[];
 }
+
 export const MODIFIER_KEYS = new Set([
   'Control',
   'Alt',
