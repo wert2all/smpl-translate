@@ -1,14 +1,26 @@
 @use './../../../css/variables.scss' as *;
 .alert {
-  border-color: $error-color;
-  color: $text-accent-color;
-
   span {
     display: block;
-    background-color: $error-color;
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 0.25rem;
     margin-right: 0.5rem;
+  }
+
+  &.error {
+    border-color: $error-color;
+    color: $text-accent-color;
+    span {
+      background-color: $error-color;
+    }
+  }
+
+  &.success {
+    border-color: $success-color;
+    color: $text-accent-color;
+    span {
+      background-color: $success-color;
+    }
   }
 }

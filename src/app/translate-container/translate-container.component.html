@@ -9,8 +9,8 @@
     (changeHeight)="height.set($event)" />
   <app-shared-spacer multiplexor="2" />
   @if (error(); as error) {
-    <app-shared-alert [message]="error" />
-    <app-shared-spacer />
+    <app-shared-alert [message]="error" type="error" />
+    <app-shared-spacer multiplexor="2" />
   }
   @if (translated(); as translated) {
     <app-translation [translated]="translated" [updatedHeight]="height()" />
