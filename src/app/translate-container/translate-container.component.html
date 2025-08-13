@@ -8,9 +8,9 @@
     [inputString]="inputString()"
     (changeHeight)="changeHeight($event)" />
   <app-shared-spacer multiplexor="2" />
-  <app-translation
-    [translated]="translatedString()"
-    [updatedHeight]="height()" />
-  <app-shared-spacer />
+  @if (translated(); as translated) {
+    <app-translation [translated]="translated" [updatedHeight]="height()" />
+    <app-shared-spacer />
+  }
   <app-bottom-bar />
 </div>
