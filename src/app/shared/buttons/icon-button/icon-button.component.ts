@@ -9,4 +9,5 @@ import { NgIconComponent } from '@ng-icons/core';
 })
 export class IconButtonComponent {
   icon = input.required<string>();
+  isPrimary = input<boolean>(false);
 }

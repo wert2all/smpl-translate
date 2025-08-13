@@ -3,6 +3,7 @@
     [text]="inputString()"
     (changeHeight)="changeHeight.emit($event)" />
   <app-shared-icon-button
-    class="absolute right-2 bottom-2 m-1"
+    [isPrimary]="true"
+    class="absolute right-4 bottom-0 m-1"
     icon="phosphorArrowCircleDownRightLight" />
 </div>

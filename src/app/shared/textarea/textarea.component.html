@@ -1,6 +1,6 @@
 <textarea
-  class="w-full focus:outline-none"
+  class="w-full pb-4 focus:outline-none"
   [rows]="rows()"
-  (resize)="resizeEvent($event)"
+  (resized)="resizeEvent($event)"
   >{{ text() }}</textarea
 >

@@ -3,7 +3,7 @@ export enum Language {
   en = 'en',
 }
 
-export type TextAreaSize = {
+export interface TextAreaSize {
   width: number;
   height: number;
-};
+}
