@@ -1,6 +1,5 @@
 import { Component, computed, signal } from '@angular/core';
 import { AlertComponent } from '../shared/alert/alert.component';
-import { dumpInput } from '../shared/dump.types';
 import { LoaderComponent } from '../shared/loader/loader.component';
 import {
   createLoadingState,
@@ -29,7 +28,7 @@ import { TranslationComponent } from './translation/translation.component';
   ],
 })
 export class TranslateContainerComponent {
-  protected inputString = signal(dumpInput);
+  protected inputString = signal('');
   protected height = signal<number | null>(null);
   protected mode = Mode.normal;
 
