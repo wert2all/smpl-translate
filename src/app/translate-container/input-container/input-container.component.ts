@@ -21,6 +21,8 @@ export class InputContainerComponent implements AfterViewInit {
 
   inputString = input<string>();
   changeHeight = output<number>();
+  unFocus = output<void>();
+  typed = output<void>();
 
   ngAfterViewInit() {
     this.textarea.focus();

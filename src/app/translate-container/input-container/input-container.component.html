@@ -1,7 +1,9 @@
 <div class="relative">
   <app-shared-textarea
     [text]="inputString()"
-    (changeHeight)="changeHeight.emit($event)" />
+    (changeHeight)="changeHeight.emit($event)"
+    (unFocus)="unFocus.emit()"
+    (typed)="typed.emit()" />
   <app-shared-icon-button
     [isPrimary]="true"
     class="absolute right-4 bottom-0 m-1"

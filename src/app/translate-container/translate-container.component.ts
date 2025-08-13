@@ -57,4 +57,12 @@ export class TranslateContainerComponent {
       ? state.data
       : null;
   });
+
+  onFocus() {
+    this.modeService.update(Mode.insert);
+  }
+
+  unFocus() {
+    this.modeService.update(Mode.normal);
+  }
 }
