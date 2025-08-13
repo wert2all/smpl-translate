@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { phosphorArrowCircleDownRightLight } from '@ng-icons/phosphor-icons/light';
 import { IconButtonComponent } from '../../shared/buttons/icon-button/icon-button.component';
@@ -12,4 +12,6 @@ import { TextareaComponent } from '../../shared/textarea/textarea.component';
 })
 export class InputContainerComponent {
   inputString = input<string>();
+
+  changeHeight = output<number>();
 }
