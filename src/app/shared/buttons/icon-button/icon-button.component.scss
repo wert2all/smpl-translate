@@ -3,4 +3,8 @@
   &:hover {
     background-color: $background-color;
   }
+  &.primary {
+    background-color: $primary-color;
+    color: $text-accent-color;
+  }
 }
