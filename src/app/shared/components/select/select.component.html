@@ -8,7 +8,7 @@
       <div
         tabindex="0"
         class="option flex cursor-pointer justify-between border-b-1 p-4"
-        [class.outlined]="focusedIndex === $index"
+        [class.outlined]="focusedIndex() === $index"
         [class.selected]="isSelected(option)"
         (click)="selectOption(option, $index)"
         (keypress.space)="selectOption(option, $index)"
