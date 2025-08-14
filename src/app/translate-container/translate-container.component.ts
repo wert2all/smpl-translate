@@ -12,6 +12,7 @@ import { DialogsService } from '../services/dialogs.service';
 import { ModeService } from '../services/mode.service';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { ButtonComponent } from '../shared/buttons/button/button.component';
+import { ControlsComponent } from '../shared/dialog/controls/controls.component';
 import { DialogComponent } from '../shared/dialog/dialog.component';
 import { LoaderComponent } from '../shared/loader/loader.component';
 import {
@@ -41,6 +42,7 @@ import { TranslationComponent } from './translation/translation.component';
     LoaderComponent,
     DialogComponent,
     ButtonComponent,
+    ControlsComponent,
   ],
 })
 export class TranslateContainerComponent {

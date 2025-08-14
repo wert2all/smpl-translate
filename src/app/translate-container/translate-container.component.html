@@ -33,13 +33,12 @@
         </div>
       </div>
 
-      <div class="dialog-controls">
-        <div class="sm:flex sm:flex-row-reverse">
-          <app-shared-button title="test" [isPrimary]="true" />
-          <span class="mx-2"></span>
-          <app-shared-button title="test" />
-        </div>
-      </div>
+      <app-shared-dialog-controls class="dialog-controls">
+        <app-shared-button title="test" [isPrimary]="true" />
+        <span class="mx-2"></span>
+        <app-shared-button title="test" />
+      </app-shared-dialog-controls>
+      <div></div>
     </app-shared-dialog>
   </dialog>
 </div>
