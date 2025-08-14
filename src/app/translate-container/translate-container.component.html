@@ -24,23 +24,5 @@
   }
   <app-bottom-bar [mode]="mode()" />
 
-  <dialog #settingUserLanguagesDialog>
-    <app-shared-dialog title="settings">
-      <div class="dialog-content">
-        <h1>Title</h1>
-        <div>
-          <p>content</p>
-        </div>
-      </div>
-
-      <app-shared-dialog-controls class="dialog-controls">
-        <app-shared-button title="save" [isPrimary]="true" />
-        <span class="mx-2"></span>
-        <app-shared-button
-          title="cancel"
-          (fired)="settingUserLanguagesDialog.close()" />
-      </app-shared-dialog-controls>
-      <div></div>
-    </app-shared-dialog>
-  </dialog>
+  <app-user-languages #settingUserLanguagesDialog />
 </div>

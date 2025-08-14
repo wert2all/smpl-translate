@@ -1,19 +1,10 @@
-import {
-  Component,
-  computed,
-  ElementRef,
-  inject,
-  signal,
-  ViewChild,
-} from '@angular/core';
+import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 import { DialogsService } from '../services/dialogs.service';
+import { LanguageService } from '../services/language.service';
 import { ModeService } from '../services/mode.service';
 import { AlertComponent } from '../shared/alert/alert.component';
-import { ButtonComponent } from '../shared/buttons/button/button.component';
-import { ControlsComponent } from '../shared/dialog/controls/controls.component';
-import { DialogComponent } from '../shared/dialog/dialog.component';
 import { LoaderComponent } from '../shared/loader/loader.component';
 import {
   createInitialState,
@@ -24,6 +15,7 @@ import {
 } from '../shared/shared.types';
 import { SpacerComponent } from '../shared/spacer/spacer.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
+import { UserLanguagesComponent } from './dialogs/user-languages/user-languages.component';
 import { InputContainerComponent } from './input-container/input-container.component';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
 import { TranslationComponent } from './translation/translation.component';
@@ -40,17 +32,16 @@ import { TranslationComponent } from './translation/translation.component';
     InputContainerComponent,
     AlertComponent,
     LoaderComponent,
-    DialogComponent,
-    ButtonComponent,
-    ControlsComponent,
+    UserLanguagesComponent,
   ],
 })
 export class TranslateContainerComponent {
   @ViewChild('settingUserLanguagesDialog')
-  settingUserLanguages!: ElementRef<HTMLDialogElement>;
+  settingUserLanguages!: UserLanguagesComponent;
 
   private modeService = inject(ModeService);
   private dialogService = inject(DialogsService);
+  private languageService = inject(LanguageService);
 
   protected inputString = signal('');
   protected height = signal<number | null>(null);
@@ -101,6 +92,12 @@ export class TranslateContainerComponent {
   }
 
   showUserLanguages() {
-    this.settingUserLanguages.nativeElement.showModal();
+    this.settingUserLanguages.open();
+  }
+
+  saveUserLanguages(languages: LanguageCode[]) {
+    this.languageService.setUserLanguages(languages);
+
+    this.settingUserLanguages.close();
   }
 }
