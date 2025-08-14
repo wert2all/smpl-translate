@@ -56,6 +56,10 @@ export const MODIFIER_KEYS = new Set([
   'F11',
 ]);
 
+export enum DialogType {
+  userLanguages = 'userLanguages',
+}
+
 export interface TextAreaSize {
   width: number;
   height: number;

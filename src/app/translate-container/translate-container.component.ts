@@ -6,7 +6,9 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
+import { DialogsService } from '../services/dialogs.service';
 import { ModeService } from '../services/mode.service';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { ButtonComponent } from '../shared/buttons/button/button.component';
@@ -14,6 +16,7 @@ import { DialogComponent } from '../shared/dialog/dialog.component';
 import { LoaderComponent } from '../shared/loader/loader.component';
 import {
   createInitialState,
+  DialogType,
   LanguageCode,
   Mode,
   State,
@@ -41,9 +44,11 @@ import { TranslationComponent } from './translation/translation.component';
   ],
 })
 export class TranslateContainerComponent {
-  @ViewChild('settingDialog') settingDialog!: ElementRef<HTMLDialogElement>;
+  @ViewChild('settingUserLanguagesDialog')
+  settingUserLanguages!: ElementRef<HTMLDialogElement>;
 
   private modeService = inject(ModeService);
+  private dialogService = inject(DialogsService);
 
   protected inputString = signal('');
   protected height = signal<number | null>(null);
@@ -71,6 +76,16 @@ export class TranslateContainerComponent {
       : null;
   });
 
+  constructor() {
+    this.dialogService.openWindow
+      .pipe(
+        takeUntilDestroyed(),
+        filter(type => type == DialogType.userLanguages)
+      )
+      .subscribe(() => {
+        this.showUserLanguages();
+      });
+  }
   onFocus() {
     this.modeService.update(Mode.insert);
   }
@@ -83,7 +98,7 @@ export class TranslateContainerComponent {
     console.log('fired');
   }
 
-  showSettings() {
-    this.settingDialog.nativeElement.showModal();
+  showUserLanguages() {
+    this.settingUserLanguages.nativeElement.showModal();
   }
 }
