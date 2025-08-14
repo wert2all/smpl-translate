@@ -24,10 +24,6 @@
   }
   <app-bottom-bar [mode]="mode()" />
 
-  <app-shared-select
-    [options]="testOptions()"
-    (toggleOption)="toggleOption($event)" />
-
   <app-user-languages
     #settingUserLanguagesDialog
     (saveUserLanguages)="saveUserLanguages($event)" />
