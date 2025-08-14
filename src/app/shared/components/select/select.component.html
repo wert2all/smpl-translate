@@ -7,13 +7,22 @@
     @for (option of options(); track $index) {
       <div
         tabindex="0"
-        class="option flex cursor-pointer items-center justify-between border-b-1 p-4"
+        class="option flex cursor-pointer justify-between border-b-1 p-4"
         [class.outlined]="focusedIndex === $index"
         [class.selected]="isSelected(option)"
         (click)="selectOption(option, $index)"
         (keypress.space)="selectOption(option, $index)"
         (keypress.enter)="selectOption(option, $index)">
-        {{ option.title }}
+        <div class="flex items-center gap-2">
+          @if (withIcons()) {
+            <span class="flex h-6 w-6 items-center rounded p-1">
+              @if (option.icon) {
+                <ng-icon [svg]="option.icon" />
+              }
+            </span>
+          }
+          {{ option.title }}
+        </div>
         <div class="flex items-center gap-2">
           @if (isSelected(option)) {
             <span class="selected-icon flex items-center rounded p-1">

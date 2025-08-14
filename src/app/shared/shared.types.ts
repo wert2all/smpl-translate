@@ -63,6 +63,7 @@ export enum DialogType {
 export interface SelectOption {
   title: string;
   value: string;
+  icon?: string;
   isSelected: boolean;
 }
 
