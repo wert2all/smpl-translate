@@ -1,4 +1,10 @@
-import { Component, computed, input } from '@angular/core';
+import {
+  Component,
+  computed,
+  ElementRef,
+  input,
+  ViewChild,
+} from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { phosphorCheckLight } from '@ng-icons/phosphor-icons/light';
 import { SelectOption } from '../../shared.types';
@@ -11,11 +17,13 @@ import { SelectOption } from '../../shared.types';
   viewProviders: [provideIcons({ phosphorCheckLight })],
 })
 export class SelectComponent {
+  @ViewChild('dropdownContainer') container!: ElementRef<HTMLElement>;
+
   options = input.required<SelectOption[]>();
   isMultible = input(false);
 
-  selectedOptions: SelectOption[] = [];
-  focusedIndex = 0;
+  protected selectedOptions: SelectOption[] = [];
+  protected focusedIndex = 0;
 
   protected withIcons = computed(
     () => this.options().filter(option => option.icon).length > 0
@@ -86,13 +94,13 @@ export class SelectComponent {
   private scrollToFocusedOption(): void {
     // Optional: Auto-scroll to keep focused option visible
     setTimeout(() => {
-      const container = document.querySelector('.select-container .max-h-64');
-      const focusedElement = container?.children[
+      const focusedElement = this.container?.nativeElement.children[
         this.focusedIndex
       ] as HTMLElement;
 
-      if (focusedElement && container) {
-        const containerRect = container.getBoundingClientRect();
+      if (focusedElement) {
+        const containerRect =
+          this.container.nativeElement.getBoundingClientRect();
         const elementRect = focusedElement.getBoundingClientRect();
 
         if (elementRect.bottom > containerRect.bottom) {
