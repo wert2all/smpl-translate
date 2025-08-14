@@ -1,7 +1,16 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ModeService } from '../services/mode.service';
 import { AlertComponent } from '../shared/alert/alert.component';
+import { ButtonComponent } from '../shared/buttons/button/button.component';
+import { DialogComponent } from '../shared/dialog/dialog.component';
 import { LoaderComponent } from '../shared/loader/loader.component';
 import {
   createInitialState,
@@ -10,7 +19,6 @@ import {
   State,
 } from '../shared/shared.types';
 import { SpacerComponent } from '../shared/spacer/spacer.component';
-import { WindowComponent } from '../shared/window/window.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { InputContainerComponent } from './input-container/input-container.component';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
@@ -28,10 +36,13 @@ import { TranslationComponent } from './translation/translation.component';
     InputContainerComponent,
     AlertComponent,
     LoaderComponent,
-    WindowComponent,
+    DialogComponent,
+    ButtonComponent,
   ],
 })
 export class TranslateContainerComponent {
+  @ViewChild('settingDialog') settingDialog!: ElementRef<HTMLDialogElement>;
+
   private modeService = inject(ModeService);
 
   protected inputString = signal('');
@@ -70,5 +81,9 @@ export class TranslateContainerComponent {
 
   fired() {
     console.log('fired');
+  }
+
+  showSettings() {
+    this.settingDialog.nativeElement.showModal();
   }
 }

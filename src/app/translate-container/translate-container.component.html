@@ -23,5 +23,23 @@
     <app-shared-spacer />
   }
   <app-bottom-bar [mode]="mode()" />
-  <app-shared-window />
+
+  <dialog #settingDialog>
+    <app-shared-dialog title="settings">
+      <div class="dialog-content">
+        <h1>Title</h1>
+        <div>
+          <p>content</p>
+        </div>
+      </div>
+
+      <div class="dialog-controls">
+        <div class="sm:flex sm:flex-row-reverse">
+          <app-shared-button title="test" [isPrimary]="true" />
+          <span class="mx-2"></span>
+          <app-shared-button title="test" />
+        </div>
+      </div>
+    </app-shared-dialog>
+  </dialog>
 </div>
