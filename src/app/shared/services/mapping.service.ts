@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, filter, map, Subject, withLatestFrom } from 'rxjs';
+import { Mapping, Mode, MODIFIER_KEYS } from '../../shared/shared.types';
 import { MappingFactory } from '../factories/mapping.factory';
-import { Mapping, Mode, MODIFIER_KEYS } from '../shared/shared.types';
 import { ModeService } from './mode.service';
 
 @Injectable({

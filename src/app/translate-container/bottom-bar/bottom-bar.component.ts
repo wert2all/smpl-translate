@@ -1,7 +1,8 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MappingService } from '../../services/mapping.service';
-import { KbdComponent } from '../../shared/kbd/kbd.component';
+
+import { KbdComponent } from '../../shared/components/kbd/kbd.component';
+import { MappingService } from '../../shared/services/mapping.service';
 import { Mapping, Mode } from '../../shared/shared.types';
 import { ModeComponent } from '../mode/mode.component';
 

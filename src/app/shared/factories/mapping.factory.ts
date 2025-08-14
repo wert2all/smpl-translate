@@ -4,8 +4,8 @@ import {
   ChangeToLanguage,
   SwitchLanguage,
   UserLanguagesFactory,
-} from '../shared/shared.actions';
-import { Mapping, Mode } from '../shared/shared.types';
+} from '../../shared/shared.actions';
+import { Mapping, Mode } from '../../shared/shared.types';
 
 @Injectable({
   providedIn: 'root',

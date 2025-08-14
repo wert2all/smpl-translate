@@ -1,6 +1,7 @@
 import { Component, HostListener, inject } from '@angular/core';
-import { MappingService } from './services/mapping.service';
-import { ModeService } from './services/mode.service';
+
+import { MappingService } from './shared/services/mapping.service';
+import { ModeService } from './shared/services/mode.service';
 import { Mode } from './shared/shared.types';
 import { TranslateContainerComponent } from './translate-container/translate-container.component';
 
