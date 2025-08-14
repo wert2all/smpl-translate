@@ -75,6 +75,20 @@ export class TranslateContainerComponent {
       : null;
   });
 
+  protected testOptions = signal<SelectOption[]>([
+    { title: 'first', value: 'first', isSelected: true, icon: flagUaSquare },
+    {
+      title: 'second',
+      value: 'second',
+      isSelected: false,
+      icon: flagGbSquare,
+    },
+    { title: 'third', value: 'third', isSelected: true },
+    { title: 'fourth', value: 'fourth', isSelected: false },
+    { title: 'fifth', value: 'fifth', isSelected: false },
+    { title: 'sixth', value: 'sixth', isSelected: false },
+  ]);
+
   constructor() {
     this.dialogService.openWindow
       .pipe(
@@ -105,19 +119,11 @@ export class TranslateContainerComponent {
     this.languageService.setUserLanguages(languages);
   }
 
-  testOptions(): SelectOption[] {
-    return [
-      { title: 'first', value: 'first', isSelected: true, icon: flagUaSquare },
-      {
-        title: 'second',
-        value: 'second',
-        isSelected: false,
-        icon: flagGbSquare,
-      },
-      { title: 'third', value: 'third', isSelected: true },
-      { title: 'fourth', value: 'fourth', isSelected: false },
-      { title: 'fifth', value: 'fifth', isSelected: false },
-      { title: 'sixth', value: 'sixth', isSelected: false },
-    ];
+  toggleOption(option: SelectOption) {
+    this.testOptions.update(options =>
+      options.map(o =>
+        o.value === option.value ? { ...o, isSelected: !o.isSelected } : o
+      )
+    );
   }
 }

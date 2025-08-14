@@ -3,6 +3,7 @@ import {
   computed,
   ElementRef,
   input,
+  output,
   signal,
   ViewChild,
 } from '@angular/core';
@@ -21,9 +22,11 @@ export class SelectComponent {
   @ViewChild('dropdownContainer') container!: ElementRef<HTMLElement>;
 
   options = input.required<SelectOption[]>();
-  isMultible = input(false);
+  toggleOption = output<SelectOption>();
 
-  protected selectedOptions: SelectOption[] = [];
+  protected selectedOptions = computed(() => {
+    return this.options().filter(option => option.isSelected);
+  });
   protected focusedIndex = signal<number | null>(null);
 
   protected withIcons = computed(
@@ -56,7 +59,7 @@ export class SelectComponent {
       case ' ':
         event.preventDefault();
         if (optionsLength > 0) {
-          this.toggleOption(this.options()[this.focusedIndex() || 0]);
+          this.toggleOption.emit(this.options()[this.focusedIndex() || 0]);
         }
         break;
 
@@ -76,23 +79,11 @@ export class SelectComponent {
 
   selectOption(option: SelectOption, index: number): void {
     this.focusedIndex.set(index);
-    this.toggleOption(option);
-  }
-
-  toggleOption(option: SelectOption): void {
-    const index = this.selectedOptions.findIndex(
-      selected => selected.value === option.value
-    );
-
-    if (index > -1) {
-      this.selectedOptions.splice(index, 1);
-    } else {
-      this.selectedOptions.push(option);
-    }
+    this.toggleOption.emit(option);
   }
 
   isSelected(option: SelectOption): boolean {
-    return this.selectedOptions.some(
+    return this.selectedOptions().some(
       selected => selected.value === option.value
     );
   }
