@@ -1,11 +1,12 @@
 import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
-import { DialogsService } from '../services/dialogs.service';
-import { LanguageService } from '../services/language.service';
-import { ModeService } from '../services/mode.service';
-import { AlertComponent } from '../shared/alert/alert.component';
-import { LoaderComponent } from '../shared/loader/loader.component';
+import { AlertComponent } from '../shared/components/alert/alert.component';
+import { LoaderComponent } from '../shared/components/loader/loader.component';
+import { SpacerComponent } from '../shared/components/spacer/spacer.component';
+import { DialogsService } from '../shared/services/dialogs.service';
+import { LanguageService } from '../shared/services/language.service';
+import { ModeService } from '../shared/services/mode.service';
 import {
   createInitialState,
   DialogType,
@@ -13,7 +14,6 @@ import {
   Mode,
   State,
 } from '../shared/shared.types';
-import { SpacerComponent } from '../shared/spacer/spacer.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { UserLanguagesComponent } from './dialogs/user-languages/user-languages.component';
 import { InputContainerComponent } from './input-container/input-container.component';

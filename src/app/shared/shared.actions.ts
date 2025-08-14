@@ -1,5 +1,6 @@
 import { inject, Injector, runInInjectionContext } from '@angular/core';
-import { DialogsService } from '../services/dialogs.service';
+
+import { DialogsService } from './services/dialogs.service';
 import { Action, DialogType } from './shared.types';
 
 export const SwitchLanguage: Action = () => {

@@ -1,6 +1,6 @@
 import { Component, ElementRef, input, output, ViewChild } from '@angular/core';
-import { ResizableTextAreaDirective } from '../directives/resizable.textarea.directive';
-import { TextAreaSize } from '../shared.types';
+import { ResizableTextAreaDirective } from '../../directives/resizable.textarea.directive';
+import { TextAreaSize } from '../../shared.types';
 
 @Component({
   selector: 'app-shared-textarea',

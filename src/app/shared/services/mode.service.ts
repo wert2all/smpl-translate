@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Mode } from '../shared/shared.types';
+import { Mode } from '../../shared/shared.types';
 
 @Injectable({
   providedIn: 'root',

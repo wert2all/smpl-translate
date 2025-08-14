@@ -4,10 +4,10 @@ import {
   phosphorClipboardTextLight,
   phosphorTranslateLight,
 } from '@ng-icons/phosphor-icons/light';
-import { IconButtonComponent } from '../../shared/buttons/icon-button/icon-button.component';
-import { DividerComponent } from '../../shared/divider/divider.component';
-import { SpacerComponent } from '../../shared/spacer/spacer.component';
-import { TitleComponent } from '../../shared/title/title.component';
+import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
+import { DividerComponent } from '../../shared/components/divider/divider.component';
+import { SpacerComponent } from '../../shared/components/spacer/spacer.component';
+import { TitleComponent } from '../../shared/components/title/title.component';
 
 @Component({
   selector: 'app-translation',

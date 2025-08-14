@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { DialogType } from '../shared/shared.types';
+import { DialogType } from '../../shared/shared.types';
 
 @Injectable({
   providedIn: 'root',

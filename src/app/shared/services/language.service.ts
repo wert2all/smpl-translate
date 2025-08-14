@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
 import { BehaviorSubject } from 'rxjs';
-import { Language, LanguageCode } from '../shared/shared.types';
+import { Language, LanguageCode } from '../../shared/shared.types';
 import { LocalStorageService } from './local-storage.service';
 
 const USER_LANGUAGES_KEY = 'userLanguages';
