@@ -15,3 +15,7 @@ export const ChangeToLanguage: Action = () => {
 export const Translate: Action = () => {
   console.log('translate');
 };
+
+export const UserLanguages: Action = () => {
+  console.log('user languages');
+};
