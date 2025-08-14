@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, output, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../../../shared/buttons/button/button.component';
 import { ControlsComponent } from '../../../shared/dialog/controls/controls.component';
 import { DialogComponent } from '../../../shared/dialog/dialog.component';
@@ -10,19 +10,21 @@ import { LanguageCode } from '../../../shared/shared.types';
   imports: [DialogComponent, ControlsComponent, ButtonComponent],
 })
 export class UserLanguagesComponent {
-  @ViewChild('settingUserLanguagesDialog')
-  protected dialogElement!: ElementRef<HTMLDialogElement>;
+  @ViewChild('userLanguagesDialog')
+  private dialogElement!: ElementRef<HTMLDialogElement>;
+
+  saveUserLanguages = output<LanguageCode[]>();
 
   open() {
     this.dialogElement.nativeElement.showModal();
   }
 
-  close() {
-    this.dialogElement.nativeElement.close();
+  protected save() {
+    this.saveUserLanguages.emit([]);
+    this.close();
   }
 
-  protected saveUserLanguages(codes: LanguageCode[]) {
-    console.log(codes);
-    throw new Error('Method not implemented.');
+  protected close() {
+    this.dialogElement.nativeElement.close();
   }
 }

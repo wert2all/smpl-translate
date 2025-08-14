@@ -97,7 +97,5 @@ export class TranslateContainerComponent {
 
   saveUserLanguages(languages: LanguageCode[]) {
     this.languageService.setUserLanguages(languages);
-
-    this.settingUserLanguages.close();
   }
 }
