@@ -3,6 +3,7 @@ import {
   computed,
   ElementRef,
   input,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
@@ -23,7 +24,7 @@ export class SelectComponent {
   isMultible = input(false);
 
   protected selectedOptions: SelectOption[] = [];
-  protected focusedIndex = 0;
+  protected focusedIndex = signal<number | null>(null);
 
   protected withIcons = computed(
     () => this.options().filter(option => option.icon).length > 0
@@ -35,14 +36,19 @@ export class SelectComponent {
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
-        this.focusedIndex = (this.focusedIndex + 1) % optionsLength;
+        this.focusedIndex.update(focusedIndex => {
+          if (!focusedIndex) focusedIndex = 0;
+          return (focusedIndex + 1) % optionsLength;
+        });
         this.scrollToFocusedOption();
         break;
 
       case 'ArrowUp':
         event.preventDefault();
-        this.focusedIndex =
-          this.focusedIndex === 0 ? optionsLength - 1 : this.focusedIndex - 1;
+        this.focusedIndex.update(focusedIndex => {
+          if (!focusedIndex) focusedIndex = 0;
+          return focusedIndex === 0 ? optionsLength - 1 : focusedIndex - 1;
+        });
         this.scrollToFocusedOption();
         break;
 
@@ -50,26 +56,26 @@ export class SelectComponent {
       case ' ':
         event.preventDefault();
         if (optionsLength > 0) {
-          this.toggleOption(this.options()[this.focusedIndex]);
+          this.toggleOption(this.options()[this.focusedIndex() || 0]);
         }
         break;
 
       case 'Home':
         event.preventDefault();
-        this.focusedIndex = 0;
+        this.focusedIndex.set(0);
         this.scrollToFocusedOption();
         break;
 
       case 'End':
         event.preventDefault();
-        this.focusedIndex = optionsLength - 1;
+        this.focusedIndex.set(optionsLength - 1);
         this.scrollToFocusedOption();
         break;
     }
   }
 
   selectOption(option: SelectOption, index: number): void {
-    this.focusedIndex = index;
+    this.focusedIndex.set(index);
     this.toggleOption(option);
   }
 
@@ -95,7 +101,7 @@ export class SelectComponent {
     // Optional: Auto-scroll to keep focused option visible
     setTimeout(() => {
       const focusedElement = this.container?.nativeElement.children[
-        this.focusedIndex
+        this.focusedIndex() || 0
       ] as HTMLElement;
 
       if (focusedElement) {
