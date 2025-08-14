@@ -1,0 +1,12 @@
+@use './../../../css/variables.scss' as *;
+
+.dialog-panel {
+  background-color: $container-bg-color;
+  color: $container-text-color;
+  .dialog-title {
+    color: $text-accent-color;
+    span {
+      background-color: $dialog-title-bg-color;
+    }
+  }
+}
