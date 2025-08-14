@@ -1,8 +1,8 @@
 import { Component, ElementRef, output, ViewChild } from '@angular/core';
-import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
-import { ControlsComponent } from '../../../shared/components/dialog/controls/controls.component';
-import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
-import { LanguageCode } from '../../../shared/shared.types';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { ControlsComponent } from '../../../../shared/components/dialog/controls/controls.component';
+import { DialogComponent } from '../../../../shared/components/dialog/dialog.component';
+import { LanguageCode } from '../../../../shared/shared.types';
 
 @Component({
   selector: 'app-user-languages',

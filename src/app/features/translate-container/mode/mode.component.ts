@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Mode } from '../../shared/shared.types';
+import { Mode } from '../../../shared/shared.types';
 
 @Component({
   selector: 'app-translate-mode',

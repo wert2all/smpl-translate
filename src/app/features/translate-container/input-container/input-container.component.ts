@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { phosphorArrowCircleDownRightLight } from '@ng-icons/phosphor-icons/light';
-import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
-import { TextareaComponent } from '../../shared/components/textarea/textarea.component';
+import { IconButtonComponent } from '../../../shared/components/buttons/icon-button/icon-button.component';
+import { TextareaComponent } from '../../../shared/components/textarea/textarea.component';
 
 @Component({
   selector: 'app-input-container',
