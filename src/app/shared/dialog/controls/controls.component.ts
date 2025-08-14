@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
   selector: 'app-shared-dialog-controls',
   template: ` <div class="sm:flex sm:flex-row-reverse"><ng-content /></div> `,
 })
-export class ControlsComponent { }
+export class ControlsComponent {}

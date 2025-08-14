@@ -34,9 +34,11 @@
       </div>
 
       <app-shared-dialog-controls class="dialog-controls">
-        <app-shared-button title="test" [isPrimary]="true" />
+        <app-shared-button title="save" [isPrimary]="true" />
         <span class="mx-2"></span>
-        <app-shared-button title="test" />
+        <app-shared-button
+          title="cancel"
+          (fired)="settingUserLanguagesDialog.close()" />
       </app-shared-dialog-controls>
       <div></div>
     </app-shared-dialog>
