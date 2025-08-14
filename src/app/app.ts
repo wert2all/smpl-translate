@@ -1,9 +1,9 @@
 import { Component, HostListener, inject } from '@angular/core';
 
+import { TranslateContainerComponent } from './features/translate-container/translate-container.component';
 import { MappingService } from './shared/services/mapping.service';
 import { ModeService } from './shared/services/mode.service';
 import { Mode } from './shared/shared.types';
-import { TranslateContainerComponent } from './translate-container/translate-container.component';
 
 @Component({
   selector: 'app-root',
