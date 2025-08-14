@@ -24,5 +24,7 @@
   }
   <app-bottom-bar [mode]="mode()" />
 
-  <app-user-languages #settingUserLanguagesDialog />
+  <app-user-languages
+    #settingUserLanguagesDialog
+    (saveUserLanguages)="saveUserLanguages($event)" />
 </div>
