@@ -4,6 +4,7 @@
   </div>
   <div>
     @for (mapping of mappings(); track $index) {
+      <span class="me-2"></span>
       @for (key of mapping.keys; track $index) {
         <app-shared-kbd [key]="key"></app-shared-kbd>
         <span class="me-2"></span>
