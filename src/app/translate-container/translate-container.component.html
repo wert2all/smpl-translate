@@ -24,6 +24,8 @@
   }
   <app-bottom-bar [mode]="mode()" />
 
+  <app-shared-select [options]="testOptions()" />
+
   <app-user-languages
     #settingUserLanguagesDialog
     (saveUserLanguages)="saveUserLanguages($event)" />

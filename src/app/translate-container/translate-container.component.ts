@@ -3,6 +3,7 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 import { AlertComponent } from '../shared/components/alert/alert.component';
 import { LoaderComponent } from '../shared/components/loader/loader.component';
+import { SelectComponent } from '../shared/components/select/select.component';
 import { SpacerComponent } from '../shared/components/spacer/spacer.component';
 import { DialogsService } from '../shared/services/dialogs.service';
 import { LanguageService } from '../shared/services/language.service';
@@ -12,6 +13,7 @@ import {
   DialogType,
   LanguageCode,
   Mode,
+  SelectOption,
   State,
 } from '../shared/shared.types';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
@@ -33,6 +35,7 @@ import { TranslationComponent } from './translation/translation.component';
     AlertComponent,
     LoaderComponent,
     UserLanguagesComponent,
+    SelectComponent,
   ],
 })
 export class TranslateContainerComponent {
@@ -97,5 +100,16 @@ export class TranslateContainerComponent {
 
   saveUserLanguages(languages: LanguageCode[]) {
     this.languageService.setUserLanguages(languages);
+  }
+
+  testOptions(): SelectOption[] {
+    return [
+      { title: 'first', value: 'first', isSelected: true },
+      { title: 'second', value: 'second', isSelected: false },
+      { title: 'third', value: 'third', isSelected: true },
+      { title: 'fourth', value: 'fourth', isSelected: false },
+      { title: 'fifth', value: 'fifth', isSelected: false },
+      { title: 'sixth', value: 'sixth', isSelected: false },
+    ];
   }
 }

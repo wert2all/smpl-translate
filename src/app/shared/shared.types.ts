@@ -60,6 +60,12 @@ export enum DialogType {
   userLanguages = 'userLanguages',
 }
 
+export interface SelectOption {
+  title: string;
+  value: string;
+  isSelected: boolean;
+}
+
 export interface TextAreaSize {
   width: number;
   height: number;

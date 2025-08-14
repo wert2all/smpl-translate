@@ -1,0 +1,25 @@
+@use './../../../../css/variables.scss' as *;
+
+.select-container {
+  background-color: $input-bg-color;
+  scrollbar-width: thin;
+  scrollbar-color: $caret-color $background-color;
+
+  .option {
+    border-color: $border-color;
+
+    &:hover,
+    &.outlined {
+      background-color: $input-bg-color-hover;
+      border-color: $input-bg-color;
+    }
+
+    &.selected {
+      color: $text-accent-color;
+    }
+
+    .selected-icon {
+      background-color: $success-color;
+    }
+  }
+}
