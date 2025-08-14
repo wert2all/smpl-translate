@@ -1,0 +1,18 @@
+<dialog #settingUserLanguagesDialog>
+  <app-shared-dialog title="settings">
+    <div class="dialog-content">
+      <h1>Title</h1>
+      <div>
+        <p>content</p>
+      </div>
+    </div>
+    <app-shared-dialog-controls class="dialog-controls">
+      <app-shared-button
+        title="save"
+        [isPrimary]="true"
+        (fired)="saveUserLanguages([])" />
+      <span class="mx-2"></span>
+      <app-shared-button title="cancel" (fired)="close()" />
+    </app-shared-dialog-controls>
+  </app-shared-dialog>
+</dialog>
