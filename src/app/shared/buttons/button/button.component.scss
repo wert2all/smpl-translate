@@ -1,0 +1,11 @@
+@use './../../../../css/variables.scss' as *;
+
+button {
+  color: $text-accent-color;
+  border-color: $border-color;
+  background-color: $button-bg-color;
+  &.primary {
+    color: $text-color;
+    background-color: $button-primary-bg-color;
+  }
+}

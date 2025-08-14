@@ -67,4 +67,8 @@ export class TranslateContainerComponent {
   unFocus() {
     this.modeService.update(Mode.normal);
   }
+
+  fired() {
+    console.log('fired');
+  }
 }
