@@ -10,6 +10,7 @@ import {
   State,
 } from '../shared/shared.types';
 import { SpacerComponent } from '../shared/spacer/spacer.component';
+import { WindowComponent } from '../shared/window/window.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { InputContainerComponent } from './input-container/input-container.component';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
@@ -27,6 +28,7 @@ import { TranslationComponent } from './translation/translation.component';
     InputContainerComponent,
     AlertComponent,
     LoaderComponent,
+    WindowComponent,
   ],
 })
 export class TranslateContainerComponent {
