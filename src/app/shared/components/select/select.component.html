@@ -1,0 +1,27 @@
+<div class="select-container inline-block">
+  <div
+    class="max-h-64 w-128 overflow-auto outline-none"
+    tabindex="0"
+    (keydown)="onKeyDown($event)"
+    #dropdownContainer>
+    @for (option of options(); track $index) {
+      <div
+        tabindex="0"
+        class="option flex cursor-pointer items-center justify-between border-b-1 p-4"
+        [class.outlined]="focusedIndex === $index"
+        [class.selected]="isSelected(option)"
+        (click)="selectOption(option, $index)"
+        (keypress.space)="selectOption(option, $index)"
+        (keypress.enter)="selectOption(option, $index)">
+        {{ option.title }}
+        <div class="flex items-center gap-2">
+          @if (isSelected(option)) {
+            <span class="selected-icon flex items-center rounded p-1">
+              <ng-icon name="phosphorCheckLight" />
+            </span>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>
