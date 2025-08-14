@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { phosphorCheckLight } from '@ng-icons/phosphor-icons/light';
 import { SelectOption } from '../../shared.types';
@@ -16,7 +16,12 @@ export class SelectComponent {
 
   selectedOptions: SelectOption[] = [];
   focusedIndex = 0;
-  onKeyDown(event: KeyboardEvent): void {
+
+  protected withIcons = computed(
+    () => this.options().filter(option => option.icon).length > 0
+  );
+
+  protected onKeyDown(event: KeyboardEvent): void {
     const optionsLength = this.options().length;
 
     switch (event.key) {

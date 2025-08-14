@@ -1,5 +1,7 @@
 import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { provideIcons } from '@ng-icons/core';
+import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
 import { filter } from 'rxjs';
 import { AlertComponent } from '../shared/components/alert/alert.component';
 import { LoaderComponent } from '../shared/components/loader/loader.component';
@@ -37,6 +39,7 @@ import { TranslationComponent } from './translation/translation.component';
     UserLanguagesComponent,
     SelectComponent,
   ],
+  viewProviders: [provideIcons({ flagUaSquare, flagGbSquare })],
 })
 export class TranslateContainerComponent {
   @ViewChild('settingUserLanguagesDialog')
@@ -104,8 +107,13 @@ export class TranslateContainerComponent {
 
   testOptions(): SelectOption[] {
     return [
-      { title: 'first', value: 'first', isSelected: true },
-      { title: 'second', value: 'second', isSelected: false },
+      { title: 'first', value: 'first', isSelected: true, icon: flagUaSquare },
+      {
+        title: 'second',
+        value: 'second',
+        isSelected: false,
+        icon: flagGbSquare,
+      },
       { title: 'third', value: 'third', isSelected: true },
       { title: 'fourth', value: 'fourth', isSelected: false },
       { title: 'fifth', value: 'fifth', isSelected: false },
