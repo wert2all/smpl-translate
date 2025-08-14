@@ -1,4 +1,6 @@
-import { Action } from './shared.types';
+import { inject, Injector, runInInjectionContext } from '@angular/core';
+import { DialogsService } from '../services/dialogs.service';
+import { Action, DialogType } from './shared.types';
 
 export const SwitchLanguage: Action = () => {
   console.log('switch language');
@@ -16,6 +18,10 @@ export const Translate: Action = () => {
   console.log('translate');
 };
 
-export const UserLanguages: Action = () => {
-  console.log('user languages');
-};
+export const UserLanguagesFactory =
+  (injector: Injector): Action =>
+  () => {
+    runInInjectionContext(injector, () => {
+      inject(DialogsService).openWindow.next(DialogType.userLanguages);
+    });
+  };
