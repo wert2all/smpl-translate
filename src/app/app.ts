@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  HostListener,
-  inject,
-  ViewChild,
-} from '@angular/core';
+import { Component, HostListener, inject, ViewChild } from '@angular/core';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
@@ -21,7 +15,7 @@ import { DialogType, LanguageCode, Mode } from './shared/shared.types';
   templateUrl: './app.html',
   imports: [TranslateContainerComponent, UserLanguagesComponent],
 })
-export class App implements AfterViewInit {
+export class App {
   @ViewChild('settingUserLanguagesDialog')
   settingUserLanguages!: UserLanguagesComponent;
 
@@ -40,9 +34,7 @@ export class App implements AfterViewInit {
         this.showUserLanguages();
       });
   }
-  ngAfterViewInit(): void {
-    this.showUserLanguages();
-  }
+
   @HostListener('document:keydown.escape')
   handleKeyboardEvent() {
     this.modeService.update(Mode.normal);

@@ -6,12 +6,7 @@ import { AlertComponent } from '../../shared/components/alert/alert.component';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { SpacerComponent } from '../../shared/components/spacer/spacer.component';
 import { ModeService } from '../../shared/services/mode.service';
-import {
-  createInitialState,
-  LanguageCode,
-  Mode,
-  State,
-} from '../../shared/shared.types';
+import { createInitialState, Mode, State } from '../../shared/shared.types';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
 import { LanguageSwitcherComponent } from './../language-switcher/language-switcher.component';
@@ -43,8 +38,6 @@ export class TranslateContainerComponent {
   });
 
   protected translateState = computed((): State => createInitialState());
-  protected fromLanguage = computed(() => LanguageCode.en);
-  protected toLanguage = computed(() => LanguageCode.ua);
 
   protected loading = computed(() => this.translateState().type == 'loading');
 

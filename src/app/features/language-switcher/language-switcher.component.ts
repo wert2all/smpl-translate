@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
 import {
@@ -23,8 +23,8 @@ import { LanguageCode } from '../../shared/shared.types';
   ],
 })
 export class LanguageSwitcherComponent {
-  maybeFromLanguage = input<LanguageCode>();
-  maybeToLanguage = input<LanguageCode>();
+  maybeFromLanguage = signal<LanguageCode>(LanguageCode.en);
+  maybeToLanguage = signal<LanguageCode>(LanguageCode.ua);
 
   protected isDefinedLanguage = computed(
     () => this.maybeFromLanguage() && this.maybeToLanguage()
