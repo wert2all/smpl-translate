@@ -61,4 +61,24 @@ export class UserLanguagesComponent {
   protected close() {
     this.dialogElement.nativeElement.close();
   }
+
+  protected toggleOption(option: SelectOption): void {
+    const selectedLanguage = this.languageService.all.find(
+      language => language.code === option.value
+    );
+
+    if (selectedLanguage) {
+      option.isSelected = !option.isSelected;
+
+      const currentUserLanguages = this.userLanguages();
+      const updatedLanguages = option.isSelected
+        ? [...currentUserLanguages, selectedLanguage]
+        : currentUserLanguages.filter(
+            language => language.code !== selectedLanguage.code
+          );
+
+      const languageCodes = updatedLanguages.map(language => language.code);
+      this.languageService.setUserLanguages(languageCodes);
+    }
+  }
 }
