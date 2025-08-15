@@ -1,10 +1,7 @@
 <dialog #userLanguagesDialog>
-  <app-shared-dialog title="settings">
+  <app-shared-dialog title="your languages">
     <div class="dialog-content">
-      <h1>Title</h1>
-      <div>
-        <p>content</p>
-      </div>
+      <app-shared-select [options]="options()" />
     </div>
     <app-shared-dialog-controls class="dialog-controls">
       <app-shared-button title="save" [isPrimary]="true" (fired)="save()" />
