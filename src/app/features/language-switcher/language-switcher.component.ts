@@ -5,8 +5,8 @@ import {
   phosphorAlienLight,
   phosphorArrowsLeftRightLight,
 } from '@ng-icons/phosphor-icons/light';
-import { IconButtonComponent } from '../../../shared/components/buttons/icon-button/icon-button.component';
-import { LanguageCode } from '../../../shared/shared.types';
+import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
+import { LanguageCode } from '../../shared/shared.types';
 
 @Component({
   selector: 'app-language-switcher',
