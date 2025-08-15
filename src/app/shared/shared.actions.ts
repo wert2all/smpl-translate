@@ -7,13 +7,21 @@ export const SwitchLanguage: Action = () => {
   console.log('switch language');
 };
 
-export const ChangeFromLanguage: Action = () => {
-  console.log('change from language');
-};
+export const ChangeFromLanguage =
+  (injector: Injector): Action =>
+  () => {
+    runInInjectionContext(injector, () => {
+      inject(DialogsService).openWindow.next(DialogType.selectFromLanguage);
+    });
+  };
 
-export const ChangeToLanguage: Action = () => {
-  console.log('change to language');
-};
+export const ChangeToLanguage =
+  (injector: Injector): Action =>
+  () => {
+    runInInjectionContext(injector, () =>
+      inject(DialogsService).openWindow.next(DialogType.selectToLanguage)
+    );
+  };
 
 export const Translate: Action = () => {
   console.log('translate');

@@ -54,12 +54,12 @@ export class MappingFactory {
       {
         keys: ['f'],
         description: 'change from language',
-        action: ChangeFromLanguage,
+        action: ChangeFromLanguage(this.injector),
       },
       {
         keys: ['t'],
         description: 'change to language',
-        action: ChangeToLanguage,
+        action: ChangeToLanguage(this.injector),
       },
     ];
   }
