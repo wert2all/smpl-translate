@@ -1,3 +1,6 @@
-<button class="btn flex items-center rounded p-1" [class.primary]="isPrimary()">
+<button
+  class="btn flex items-center rounded p-1"
+  [class.primary]="isPrimary()"
+  (click)="fire.emit()">
   <ng-icon [name]="icon()" />
 </button>

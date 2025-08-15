@@ -1,16 +1,26 @@
-<div class="language-switcher flex items-center justify-between border-1 p-4">
-  @if (isDefinedLanguage()) {
-    <div class="flex items-center space-x-4">
-      <app-shared-icon-button icon="flagUaSquare" />
-      <span class="cursor-pointer">ukrainian</span>
-      <app-shared-icon-button icon="phosphorArrowsLeftRightLight" />
-      <span class="cursor-pointer">english</span>
-      <app-shared-icon-button icon="flagGbSquare" />
-    </div>
-  } @else {
-    <div class="flex items-center space-x-4">
-      <app-shared-icon-button icon="phosphorAlienLight" />
-      <span>will detect language</span>
-    </div>
-  }
+<div class="border-1 p-4">
+  <div class="language-switcher flex items-center justify-between">
+    @if (isDefinedLanguage()) {
+      <div class="flex items-center space-x-4">
+        <app-shared-icon-button icon="flagUaSquare" />
+        <span class="cursor-pointer">ukrainian</span>
+        <app-shared-icon-button
+          icon="phosphorArrowsLeftRightLight"
+          (fire)="switchLanguage()" />
+        <span class="cursor-pointer">english</span>
+        <app-shared-icon-button icon="flagGbSquare" />
+      </div>
+    } @else {
+      <div class="flex items-center space-x-4">
+        <app-shared-icon-button icon="phosphorAlienLight" />
+        <span>will detect language</span>
+      </div>
+    }
+  </div>
+  <app-language-switcher-selector
+    (switchLanguages)="switchLanguage()"
+    (addOtherLanguages)="addOtherLanguages()"
+    [isAllLanguages]="isAllLanguages()"
+    [fromLanguagesOptions]="fromOptions()"
+    [toLanguagesOptions]="toOptions()" />
 </div>

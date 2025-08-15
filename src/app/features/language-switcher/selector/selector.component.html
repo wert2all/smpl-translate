@@ -1,0 +1,29 @@
+<div class="selector mt-4 w-full border-t-1 pt-4">
+  <div class="grid grid-cols-12">
+    <div class="col-span-5">
+      <app-shared-select [options]="fromLanguagesOptions()" />
+    </div>
+
+    <div class="col-span-2 flex justify-center">
+      <app-shared-icon-button
+        icon="phosphorArrowsLeftRightLight"
+        (fire)="switchLanguages.emit()" />
+    </div>
+
+    <div class="col-span-5">
+      <app-shared-select [options]="toLanguagesOptions()" />
+    </div>
+  </div>
+  @if (canAddOtherLanguages()) {
+    <p class="pt-4">
+      <a
+        tabindex="0"
+        class="cursor-pointer"
+        (click)="addOtherLanguages.emit()"
+        (keydown.enter)="addOtherLanguages.emit()"
+        (keydown.space)="addOtherLanguages.emit()">
+        select from all languages
+      </a>
+    </p>
+  }
+</div>
