@@ -39,5 +39,6 @@ export class LanguageService {
 
   setUserLanguages(languages: LanguageCode[]) {
     this.localStorageService.setItem(USER_LANGUAGES_KEY, languages);
+    this.userLanguages.next(this.readUserLanguages());
   }
 }

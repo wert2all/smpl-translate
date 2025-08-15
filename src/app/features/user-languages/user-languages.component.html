@@ -1,7 +1,9 @@
 <dialog #userLanguagesDialog>
   <app-shared-dialog title="your languages">
     <div class="dialog-content">
-      <app-shared-select [options]="options()" />
+      <app-shared-select
+        [options]="options()"
+        (toggleOption)="toggleOption($event)" />
     </div>
     <app-shared-dialog-controls class="dialog-controls">
       <app-shared-button title="save" [isPrimary]="true" (fired)="save()" />
