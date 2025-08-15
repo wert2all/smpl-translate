@@ -58,6 +58,8 @@ export const MODIFIER_KEYS = new Set([
 
 export enum DialogType {
   userLanguages = 'userLanguages',
+  selectFromLanguage = 'selectFromLanguage',
+  selectToLanguage = 'selectToLanguage',
 }
 
 export interface SelectOption {
