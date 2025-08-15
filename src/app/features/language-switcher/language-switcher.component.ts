@@ -1,4 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { provideIcons } from '@ng-icons/core';
 import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
 import {
@@ -6,7 +7,7 @@ import {
   phosphorArrowsLeftRightLight,
 } from '@ng-icons/phosphor-icons/light';
 import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
-import { LanguageCode } from '../../shared/shared.types';
+import { LanguageService } from '../../shared/services/language.service';
 
 @Component({
   selector: 'app-language-switcher',
@@ -23,8 +24,14 @@ import { LanguageCode } from '../../shared/shared.types';
   ],
 })
 export class LanguageSwitcherComponent {
-  maybeFromLanguage = signal<LanguageCode>(LanguageCode.en);
-  maybeToLanguage = signal<LanguageCode>(LanguageCode.ua);
+  private languageService = inject(LanguageService);
+
+  protected maybeFromLanguage = toSignal(
+    this.languageService.getUserFromLanguage()
+  );
+  protected maybeToLanguage = toSignal(
+    this.languageService.getUserToLanguage()
+  );
 
   protected isDefinedLanguage = computed(
     () => this.maybeFromLanguage() && this.maybeToLanguage()
