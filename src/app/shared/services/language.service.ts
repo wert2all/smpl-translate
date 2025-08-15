@@ -1,10 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { Language, LanguageCode } from '../../shared/shared.types';
 import { LocalStorageService } from './local-storage.service';
 
 const USER_LANGUAGES_KEY = 'userLanguages';
+const USER_FROM_LANGUAGE_KEY = 'userFromLanguage';
+const USER_TO_LANGUAGE_KEY = 'userToLanguage';
 
 @Injectable({
   providedIn: 'root',
@@ -37,8 +39,28 @@ export class LanguageService {
       .filter(lang => !!lang);
   }
 
+  private getUserLanguage(languageCode: LanguageCode | undefined | null) {
+    return this.userLanguages.pipe(
+      map(languages =>
+        languages.find(language => language.code === languageCode)
+      )
+    );
+  }
+
   setUserLanguages(languages: LanguageCode[]) {
     this.localStorageService.setItem(USER_LANGUAGES_KEY, languages);
     this.userLanguages.next(this.readUserLanguages());
+  }
+
+  getUserFromLanguage() {
+    return this.getUserLanguage(
+      this.localStorageService.getItem<LanguageCode>(USER_FROM_LANGUAGE_KEY)
+    );
+  }
+
+  getUserToLanguage() {
+    return this.getUserLanguage(
+      this.localStorageService.getItem<LanguageCode>(USER_TO_LANGUAGE_KEY)
+    );
   }
 }
