@@ -14,8 +14,8 @@ import {
 } from '../../shared/shared.types';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
+import { LanguageSwitcherComponent } from './../language-switcher/language-switcher.component';
 import { InputContainerComponent } from './input-container/input-container.component';
-import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
 import { TranslationComponent } from './translation/translation.component';
 
 @Component({
