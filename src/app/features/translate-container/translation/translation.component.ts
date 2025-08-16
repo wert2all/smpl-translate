@@ -27,6 +27,7 @@ import { TitleComponent } from '../../../shared/components/title/title.component
 export class TranslationComponent {
   translated = input<string>();
   updatedHeight = input<number | undefined | null>();
+  phosphorClipboardTextLight = phosphorClipboardTextLight;
 
   protected heightStyle = computed(() => {
     return this.updatedHeight() ? `height: ${this.updatedHeight()}px;` : '';

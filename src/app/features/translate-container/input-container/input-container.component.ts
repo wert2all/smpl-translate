@@ -23,6 +23,7 @@ export class InputContainerComponent implements AfterViewInit {
   changeHeight = output<number>();
   unFocus = output<void>();
   typed = output<void>();
+  phosphorArrowCircleDownRightLight = phosphorArrowCircleDownRightLight;
 
   ngAfterViewInit() {
     this.textarea.focus();
