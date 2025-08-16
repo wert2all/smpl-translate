@@ -1,4 +1,11 @@
-import { Component, computed, inject, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  HostListener,
+  inject,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { provideIcons } from '@ng-icons/core';
 import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
@@ -168,5 +175,12 @@ export class LanguageSwitcherComponent {
 
   closeSelector() {
     this.canChangeLanguages.set(false);
+  }
+
+  @HostListener('window:keydown.escape')
+  onEscapeKey() {
+    if (this.canChangeLanguages()) {
+      this.closeSelector();
+    }
   }
 }
