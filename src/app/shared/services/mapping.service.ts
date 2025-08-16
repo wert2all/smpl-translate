@@ -3,12 +3,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, filter, map, Subject, withLatestFrom } from 'rxjs';
 import { Mapping, Mode, MODIFIER_KEYS } from '../../shared/shared.types';
 import { MappingFactory } from '../factories/mapping.factory';
+import { ActionsService } from './actions.service';
 import { ModeService } from './mode.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MappingService {
+  private actionsService = inject(ActionsService);
+
   activeMenu = new BehaviorSubject<Mapping[]>([]);
 
   private modeService = inject(ModeService);
@@ -47,7 +50,7 @@ export class MappingService {
       return;
     }
     if (nextMenu && nextMenu.action) {
-      nextMenu.action();
+      this.actionsService.fireAction(nextMenu.action);
     }
 
     this.resetMenu(mode);

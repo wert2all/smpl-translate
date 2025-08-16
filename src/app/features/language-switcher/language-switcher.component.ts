@@ -15,10 +15,10 @@ import {
 } from '@ng-icons/phosphor-icons/light';
 import { filter } from 'rxjs';
 import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
-import { DialogsService } from '../../shared/services/dialogs.service';
+import { ActionsService } from '../../shared/services/actions.service';
 import { LanguageService } from '../../shared/services/language.service';
 import {
-  DialogType,
+  Action,
   Language,
   LanguageCode,
   SelectOption,
@@ -43,7 +43,7 @@ export class LanguageSwitcherComponent {
   @ViewChild('selector') selector!: SelectorComponent;
 
   private languageService = inject(LanguageService);
-  private dialogService = inject(DialogsService);
+  private actionService = inject(ActionsService);
 
   private userLanguages = signal<Language[]>([]);
 
@@ -64,7 +64,7 @@ export class LanguageSwitcherComponent {
     () => this.maybeFromLanguage() && this.maybeToLanguage()
   );
 
-  protected canChangeLanguages = signal(true);
+  protected canChangeLanguages = signal(false);
 
   protected fromOptions = computed((): SelectOption[] =>
     this.createOptions(this.maybeFromLanguage(), this.optionLanguages())
@@ -120,25 +120,27 @@ export class LanguageSwitcherComponent {
         this.maybeToLanguage.set(language);
       });
 
-    this.dialogService.openWindow
+    this.actionService.actions
       .pipe(
         takeUntilDestroyed(),
         filter(
-          type =>
-            type == DialogType.selectFromLanguage ||
-            type == DialogType.selectToLanguage
+          action =>
+            action == Action.ChangeFromLanguage ||
+            action == Action.ChangeToLanguage
         )
       )
-      .subscribe(type => {
+      .subscribe(action => {
+        console.log(Action);
+        console.log(action);
         this.selector.setFocus(
-          type == DialogType.selectFromLanguage ? 'from' : 'to'
+          action == Action.ChangeFromLanguage ? 'from' : 'to'
         );
         this.canChangeLanguages.set(true);
       });
   }
 
   switchLanguage() {
-    throw new Error('Method not implemented.');
+    this.actionService.fireAction(Action.SwitchLanguage);
   }
 
   addOtherLanguages() {

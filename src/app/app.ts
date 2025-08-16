@@ -4,11 +4,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 import { TranslateContainerComponent } from './features/translate-container/translate-container.component';
 import { UserLanguagesComponent } from './features/user-languages/user-languages.component';
-import { DialogsService } from './shared/services/dialogs.service';
+import { ActionsService } from './shared/services/actions.service';
 import { LanguageService } from './shared/services/language.service';
 import { MappingService } from './shared/services/mapping.service';
 import { ModeService } from './shared/services/mode.service';
-import { DialogType, LanguageCode, Mode } from './shared/shared.types';
+import { Action, LanguageCode, Mode } from './shared/shared.types';
 
 @Component({
   selector: 'app-root',
@@ -22,13 +22,13 @@ export class App {
   private modeService = inject(ModeService);
   private mappingService = inject(MappingService);
   private languageService = inject(LanguageService);
-  private dialogService = inject(DialogsService);
+  private actionsService = inject(ActionsService);
 
   constructor() {
-    this.dialogService.openWindow
+    this.actionsService.actions
       .pipe(
         takeUntilDestroyed(),
-        filter(type => type == DialogType.userLanguages)
+        filter(action => action == Action.UpdateUserLanguages)
       )
       .subscribe(() => {
         this.showUserLanguages();

@@ -16,7 +16,13 @@ export enum Mode {
   visual = 'visual',
 }
 
-export type Action = () => void;
+export enum Action {
+  SwitchLanguage,
+  ChangeFromLanguage,
+  ChangeToLanguage,
+  Translate,
+  UpdateUserLanguages,
+}
 
 export interface Mapping {
   keys: string[];
