@@ -39,6 +39,8 @@ export class LanguageSwitcherComponent {
   private userLanguages = signal<Language[]>([]);
 
   protected phosphorArrowsLeftRightLight = phosphorArrowsLeftRightLight;
+  protected phosphorAlienLight = phosphorAlienLight;
+
   protected isAllLanguages = signal(false);
 
   protected maybeFromLanguage = signal<Language | null | undefined>(null);
@@ -56,7 +58,7 @@ export class LanguageSwitcherComponent {
       isSelected: false,
     }))
   );
-  protected canChangeLanguages = signal(true);
+  protected canChangeLanguages = signal(false);
 
   private getListLanguages(): Language[] {
     return [
