@@ -50,3 +50,57 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 
 - Control flow (`@if`):
   - You cannot use `as` expressions in `@else if (...)`. E.g. invalid code: `@else if (bla(); as x)`.
+
+## Building and Running
+
+### Development Server
+
+To start a local development server, run:
+
+```bash
+pnpm start
+```
+
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+
+### Building
+
+To build the project, run:
+
+```bash
+pnpm run build
+```
+
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+### Running Unit Tests
+
+To execute unit tests, use the following command:
+
+```bash
+pnpm run test
+```
+
+## Project-Specific Conventions
+
+### Code Formatting
+
+This project uses [Prettier](https://prettier.io/) for code formatting. To format the code, run:
+
+```bash
+pnpm run format
+```
+
+### Linting
+
+This project uses [ESLint](https://eslint.org/) for linting. To check the code for linting errors, run:
+
+```bash
+pnpm run lint
+```
+
+or
+
+```bash
+pnpm run lint:eslint
+```
