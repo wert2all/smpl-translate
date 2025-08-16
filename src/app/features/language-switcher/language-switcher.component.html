@@ -22,6 +22,7 @@
     }
   </div>
   <app-language-switcher-selector
+    #selector
     [class.hidden]="!canChangeLanguages()"
     (switchLanguages)="switchLanguage()"
     (addOtherLanguages)="addOtherLanguages()"

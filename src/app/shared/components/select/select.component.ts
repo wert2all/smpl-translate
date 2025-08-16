@@ -77,12 +77,12 @@ export class SelectComponent {
     }
   }
 
-  selectOption(option: SelectOption, index: number): void {
+  protected selectOption(option: SelectOption, index: number): void {
     this.focusedIndex.set(index);
     this.toggleOption.emit(option);
   }
 
-  isSelected(option: SelectOption): boolean {
+  protected isSelected(option: SelectOption): boolean {
     return this.selectedOptions().some(
       selected => selected.value === option.value
     );
@@ -106,6 +106,13 @@ export class SelectComponent {
           focusedElement.scrollIntoView({ block: 'start', behavior: 'smooth' });
         }
       }
+    });
+  }
+
+  setFocus(): void {
+    setTimeout(() => {
+      this.container.nativeElement.focus();
+      this.focusedIndex.set(0);
     });
   }
 }
