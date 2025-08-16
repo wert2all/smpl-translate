@@ -18,16 +18,24 @@
         (toggleOption)="selectTo.emit($event)" />
     </div>
   </div>
-  @if (canAddOtherLanguages()) {
-    <p class="pt-4">
-      <a
-        tabindex="0"
-        class="cursor-pointer"
-        (click)="addOtherLanguages.emit()"
-        (keydown.enter)="addOtherLanguages.emit()"
-        (keydown.space)="addOtherLanguages.emit()">
-        select from all languages
-      </a>
-    </p>
-  }
+  <div class="flex items-center justify-between pt-4">
+    @if (canAddOtherLanguages()) {
+      <p>
+        <a
+          tabindex="0"
+          class="cursor-pointer"
+          (click)="addOtherLanguages.emit()"
+          (keydown.enter)="addOtherLanguages.emit()"
+          (keydown.space)="addOtherLanguages.emit()">
+          select from all languages
+        </a>
+      </p>
+    } @else {
+      <div></div>
+    }
+    <app-shared-icon-button
+      [isPrimary]="true"
+      [icon]="phosphorXSquareLight"
+      (fire)="closeSelector.emit()" />
+  </div>
 </div>

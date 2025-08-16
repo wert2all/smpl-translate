@@ -56,7 +56,7 @@ export class LanguageSwitcherComponent {
       isSelected: false,
     }))
   );
-  protected canChangeLanguages = signal(false);
+  protected canChangeLanguages = signal(true);
 
   private getListLanguages(): Language[] {
     return [
@@ -149,5 +149,9 @@ export class LanguageSwitcherComponent {
       return value as LanguageCode;
     }
     return null;
+  }
+
+  closeSelector() {
+    this.canChangeLanguages.set(false);
   }
 }
