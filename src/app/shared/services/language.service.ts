@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Language, LanguageCode } from '../../shared/shared.types';
 import { LocalStorageService } from './local-storage.service';
 
@@ -30,6 +30,16 @@ export class LanguageService {
   readonly userLanguages = new BehaviorSubject<Language[]>(
     this.readUserLanguages()
   );
+  readonly userFromLanguage = new BehaviorSubject<Language | undefined>(
+    this.getLanguage(
+      this.localStorageService.getItem<LanguageCode>(USER_FROM_LANGUAGE_KEY)
+    )
+  );
+  readonly userToLanguage = new BehaviorSubject<Language | undefined>(
+    this.getLanguage(
+      this.localStorageService.getItem<LanguageCode>(USER_TO_LANGUAGE_KEY)
+    )
+  );
 
   private readUserLanguages(): Language[] {
     return (
@@ -39,12 +49,8 @@ export class LanguageService {
       .filter(lang => !!lang);
   }
 
-  private getUserLanguage(languageCode: LanguageCode | undefined | null) {
-    return this.userLanguages.pipe(
-      map(languages =>
-        languages.find(language => language.code === languageCode)
-      )
-    );
+  private getLanguage(languageCode: LanguageCode | undefined | null) {
+    return this.all.find(language => language.code === languageCode);
   }
 
   setUserLanguages(languages: LanguageCode[]) {
@@ -52,15 +58,13 @@ export class LanguageService {
     this.userLanguages.next(this.readUserLanguages());
   }
 
-  getUserFromLanguage() {
-    return this.getUserLanguage(
-      this.localStorageService.getItem<LanguageCode>(USER_FROM_LANGUAGE_KEY)
-    );
+  setUserToLanguageCode(code: LanguageCode) {
+    this.localStorageService.setItem(USER_TO_LANGUAGE_KEY, code);
+    this.userToLanguage.next(this.getLanguage(code));
   }
 
-  getUserToLanguage() {
-    return this.getUserLanguage(
-      this.localStorageService.getItem<LanguageCode>(USER_TO_LANGUAGE_KEY)
-    );
+  setUserFromLanguageCode(code: LanguageCode) {
+    this.localStorageService.setItem(USER_FROM_LANGUAGE_KEY, code);
+    this.userFromLanguage.next(this.getLanguage(code));
   }
 }

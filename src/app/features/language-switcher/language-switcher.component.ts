@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { provideIcons } from '@ng-icons/core';
 import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
 import {
@@ -8,7 +8,11 @@ import {
 } from '@ng-icons/phosphor-icons/light';
 import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
 import { LanguageService } from '../../shared/services/language.service';
-import { Language, SelectOption } from '../../shared/shared.types';
+import {
+  Language,
+  LanguageCode,
+  SelectOption,
+} from '../../shared/shared.types';
 import { SelectorComponent } from './selector/selector.component';
 
 @Component({
@@ -32,28 +36,30 @@ export class LanguageSwitcherComponent {
 
   protected isAllLanguages = signal(false);
 
-  protected maybeFromLanguage = toSignal(
-    this.languageService.getUserFromLanguage()
-  );
-  protected maybeToLanguage = toSignal(
-    this.languageService.getUserToLanguage()
-  );
+  protected maybeFromLanguage = signal<Language | null | undefined>(null);
+  protected maybeToLanguage = signal<Language | null | undefined>(null);
 
   protected isDefinedLanguage = computed(
     () => this.maybeFromLanguage() && this.maybeToLanguage()
   );
 
   private options = computed((): SelectOption[] =>
-    this.makeUniqueLanguages([
-      ...this.userLanguages(),
-      ...(this.isAllLanguages() ? this.languageService.all : []),
-    ]).map(language => ({
+    this.makeUniqueLanguages(this.getListLanguages()).map(language => ({
       title: language.name,
       value: language.code,
       icon: language.flag,
       isSelected: false,
     }))
   );
+
+  private getListLanguages(): Language[] {
+    return [
+      this.maybeFromLanguage(),
+      this.maybeToLanguage(),
+      ...this.userLanguages(),
+      ...(this.isAllLanguages() ? this.languageService.all : []),
+    ].filter(l => !!l);
+  }
 
   private makeUniqueLanguages(languages: Language[]) {
     return Array.from(
@@ -65,14 +71,15 @@ export class LanguageSwitcherComponent {
     const options = this.options();
     const from = this.maybeFromLanguage();
     return options.map(option =>
-      option.value == from?.code ? { ...option, selected: true } : option
+      option.value == from?.code ? { ...option, isSelected: true } : option
     );
   });
+
   protected toOptions = computed((): SelectOption[] => {
     const options = this.options();
     const to = this.maybeToLanguage();
     return options.map(option =>
-      option.value == to?.code ? { ...option, selected: true } : option
+      option.value == to?.code ? { ...option, isSelected: true } : option
     );
   });
 
@@ -82,6 +89,18 @@ export class LanguageSwitcherComponent {
       .subscribe(languages => {
         this.userLanguages.set(languages);
       });
+
+    this.languageService.userFromLanguage
+      .pipe(takeUntilDestroyed())
+      .subscribe(language => {
+        this.maybeFromLanguage.set(language);
+      });
+
+    this.languageService.userToLanguage
+      .pipe(takeUntilDestroyed())
+      .subscribe(language => {
+        this.maybeToLanguage.set(language);
+      });
   }
 
   switchLanguage() {
@@ -90,5 +109,24 @@ export class LanguageSwitcherComponent {
 
   addOtherLanguages() {
     this.isAllLanguages.set(true);
+  }
+
+  selectFromLanguage(option: SelectOption) {
+    this.languageService.setUserFromLanguageCode(
+      this.getLanguageCode(option.value)
+    );
+  }
+
+  selectToLanguage(option: SelectOption) {
+    this.languageService.setUserToLanguageCode(
+      this.getLanguageCode(option.value)
+    );
+  }
+
+  getLanguageCode(value: string): LanguageCode {
+    if (Object.values(LanguageCode).includes(value as LanguageCode)) {
+      return value as LanguageCode;
+    }
+    return LanguageCode.en;
   }
 }

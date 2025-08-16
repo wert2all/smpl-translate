@@ -20,6 +20,8 @@
   <app-language-switcher-selector
     (switchLanguages)="switchLanguage()"
     (addOtherLanguages)="addOtherLanguages()"
+    (selectFrom)="selectFromLanguage($event)"
+    (selectTo)="selectToLanguage($event)"
     [isAllLanguages]="isAllLanguages()"
     [fromLanguagesOptions]="fromOptions()"
     [toLanguagesOptions]="toOptions()" />

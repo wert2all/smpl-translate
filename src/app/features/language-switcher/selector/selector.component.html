@@ -1,7 +1,9 @@
 <div class="selector mt-4 w-full border-t-1 pt-4">
   <div class="grid grid-cols-12">
     <div class="col-span-5">
-      <app-shared-select [options]="fromLanguagesOptions()" />
+      <app-shared-select
+        [options]="fromLanguagesOptions()"
+        (toggleOption)="selectFrom.emit($event)" />
     </div>
 
     <div class="col-span-2 flex justify-center">
@@ -11,7 +13,9 @@
     </div>
 
     <div class="col-span-5">
-      <app-shared-select [options]="toLanguagesOptions()" />
+      <app-shared-select
+        [options]="toLanguagesOptions()"
+        (toggleOption)="selectTo.emit($event)" />
     </div>
   </div>
   @if (canAddOtherLanguages()) {

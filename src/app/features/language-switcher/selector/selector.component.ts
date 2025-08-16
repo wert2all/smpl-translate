@@ -18,6 +18,8 @@ export class SelectorComponent {
 
   switchLanguages = output();
   addOtherLanguages = output();
+  selectFrom = output<SelectOption>();
+  selectTo = output<SelectOption>();
 
   protected canAddOtherLanguages = computed(
     () => this.isAllLanguages() === false
