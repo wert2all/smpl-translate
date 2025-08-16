@@ -1,6 +1,14 @@
 # SmplTranslate
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
+SmplTranslate is a minimalist translation application built with [Angular](https://angular.dev/). The goal of this project is to provide a simple, fast, and intuitive interface for translating text. It features a clean, uncluttered UI and supports keyboard shortcuts for a more efficient workflow. The application is designed to be straightforward, focusing on the core functionality of translation without unnecessary distractions.
+
+## Features
+
+- **Real-time Translation:** Get instant translations as you type.
+- **Multiple Language Support:** Switch between different languages seamlessly.
+- **Keyboard Shortcuts:** Use keyboard shortcuts for quick and easy navigation and translation.
+- **Vim-inspired Modes:** Switch between "insert" and "normal" modes for a more efficient workflow.
+- **Clean and Simple UI:** A minimalist design that focuses on the core functionality of translation.
 
 ## Development server
 
