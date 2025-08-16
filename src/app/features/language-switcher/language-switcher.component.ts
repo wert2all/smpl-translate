@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { provideIcons } from '@ng-icons/core';
 import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
@@ -33,6 +33,8 @@ import { SelectorComponent } from './selector/selector.component';
   ],
 })
 export class LanguageSwitcherComponent {
+  @ViewChild('selector') selector!: SelectorComponent;
+
   private languageService = inject(LanguageService);
   private dialogService = inject(DialogsService);
 
@@ -113,13 +115,20 @@ export class LanguageSwitcherComponent {
     this.dialogService.openWindow
       .pipe(
         takeUntilDestroyed(),
-        filter(
-          type =>
-            type === DialogType.selectFromLanguage ||
-            type === DialogType.selectToLanguage
-        )
+        filter(type => type == DialogType.selectFromLanguage)
       )
       .subscribe(() => {
+        this.selector.setFocus('from');
+        this.canChangeLanguages.set(true);
+      });
+
+    this.dialogService.openWindow
+      .pipe(
+        takeUntilDestroyed(),
+        filter(type => type == DialogType.selectToLanguage)
+      )
+      .subscribe(() => {
+        this.selector.setFocus('to');
         this.canChangeLanguages.set(true);
       });
   }

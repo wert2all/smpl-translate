@@ -1,4 +1,4 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, input, output, ViewChild } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
   phosphorArrowsLeftRightLight,
@@ -17,6 +17,9 @@ import { SelectOption } from '../../../shared/shared.types';
   ],
 })
 export class SelectorComponent {
+  @ViewChild('from') from!: SelectComponent;
+  @ViewChild('to') to!: SelectComponent;
+
   fromLanguagesOptions = input.required<SelectOption[]>();
   toLanguagesOptions = input.required<SelectOption[]>();
   isAllLanguages = input(false);
@@ -27,10 +30,14 @@ export class SelectorComponent {
   selectFrom = output<SelectOption>();
   selectTo = output<SelectOption>();
 
-  phosphorArrowsLeftRightLight = phosphorArrowsLeftRightLight;
-  phosphorXSquareLight = phosphorXSquareLight;
+  protected phosphorArrowsLeftRightLight = phosphorArrowsLeftRightLight;
+  protected phosphorXSquareLight = phosphorXSquareLight;
 
   protected canAddOtherLanguages = computed(
     () => this.isAllLanguages() === false
   );
+
+  setFocus(desctination: 'from' | 'to') {
+    (desctination === 'from' ? this.from : this.to).setFocus();
+  }
 }
