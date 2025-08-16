@@ -67,12 +67,12 @@ export class LanguageService {
     this.userLanguages.next(this.readUserLanguages());
   }
 
-  setUserToLanguageCode(code: LanguageCode) {
+  setUserToLanguageCode(code: LanguageCode | null) {
     this.localStorageService.setItem(USER_TO_LANGUAGE_KEY, code);
     this.userToLanguage.next(this.getLanguage(code));
   }
 
-  setUserFromLanguageCode(code: LanguageCode) {
+  setUserFromLanguageCode(code: LanguageCode | null) {
     this.localStorageService.setItem(USER_FROM_LANGUAGE_KEY, code);
     this.userFromLanguage.next(this.getLanguage(code));
   }
