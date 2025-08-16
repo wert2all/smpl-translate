@@ -47,6 +47,11 @@ export class LanguageSwitcherComponent {
 
   private userLanguages = signal<Language[]>([]);
 
+  private optionLanguages = computed((): Language[] => [
+    ...this.userLanguages(),
+    ...(this.isAllLanguages() ? this.languageService.all : []),
+  ]);
+
   protected phosphorArrowsLeftRightLight = phosphorArrowsLeftRightLight;
   protected phosphorAlienLight = phosphorAlienLight;
 
@@ -61,52 +66,40 @@ export class LanguageSwitcherComponent {
 
   protected canChangeLanguages = signal(true);
 
-  private fromLanguages = computed((): Language[] =>
-    [
-      this.maybeFromLanguage(),
-      ...this.userLanguages(),
-      ...(this.isAllLanguages() ? this.languageService.all : []),
-    ].filter((l): l is Language => !!l)
+  protected fromOptions = computed((): SelectOption[] =>
+    this.createOptions(this.maybeFromLanguage(), this.optionLanguages())
   );
 
-  private toLanguages = computed((): Language[] =>
-    [
-      this.maybeToLanguage(),
-      ...this.userLanguages(),
-      ...(this.isAllLanguages() ? this.languageService.all : []),
-    ].filter((l): l is Language => !!l)
+  protected toOptions = computed((): SelectOption[] =>
+    this.createOptions(this.maybeToLanguage(), this.optionLanguages())
   );
 
-  private makeOptions(languages: Language[]): SelectOption[] {
-    return this.makeUniqueLanguages(languages).map(language => ({
-      title: language.name,
-      value: language.code,
-      icon: language.flag,
-      isSelected: false,
-    }));
+  private createOptions(
+    userSelected: Language | null | undefined,
+    languages: Language[]
+  ): SelectOption[] {
+    return [userSelected, ...languages]
+      .map(language =>
+        language
+          ? {
+              title: language.name,
+              value: language.code,
+              icon: language.flag,
+              isSelected: language.code == userSelected?.code,
+            }
+          : null
+      )
+      .filter(
+        (item, index, arr) =>
+          item && arr.findIndex(i => i?.value === item.value) === index
+      ) as SelectOption[];
   }
 
-  private makeUniqueLanguages(languages: Language[]) {
-    return Array.from(
-      new Map(languages.map(lang => [lang.code, lang])).values()
-    );
+  private getLanguageCode(value: string | null): LanguageCode | null {
+    return Object.values(LanguageCode).includes(value as LanguageCode)
+      ? (value as LanguageCode)
+      : null;
   }
-
-  protected fromOptions = computed((): SelectOption[] => {
-    const options = this.makeOptions(this.fromLanguages());
-    const from = this.maybeFromLanguage();
-    return options.map(option =>
-      option.value == from?.code ? { ...option, isSelected: true } : option
-    );
-  });
-
-  protected toOptions = computed((): SelectOption[] => {
-    const options = this.makeOptions(this.toLanguages());
-    const to = this.maybeToLanguage();
-    return options.map(option =>
-      option.value == to?.code ? { ...option, isSelected: true } : option
-    );
-  });
 
   constructor() {
     this.languageService.userLanguages
@@ -166,19 +159,12 @@ export class LanguageSwitcherComponent {
     this.languageService.setUserToLanguageCode(languageCode);
   }
 
-  getLanguageCode(value: string | null): LanguageCode | null {
-    if (Object.values(LanguageCode).includes(value as LanguageCode)) {
-      return value as LanguageCode;
-    }
-    return null;
-  }
-
   closeSelector() {
     this.canChangeLanguages.set(false);
   }
 
   @HostListener('window:keydown.escape')
-  onEscapeKey() {
+  protected onEscapeKey() {
     if (this.canChangeLanguages()) {
       this.closeSelector();
     }
