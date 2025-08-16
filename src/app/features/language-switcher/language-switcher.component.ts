@@ -52,23 +52,31 @@ export class LanguageSwitcherComponent {
     () => this.maybeFromLanguage() && this.maybeToLanguage()
   );
 
-  private options = computed((): SelectOption[] =>
-    this.makeUniqueLanguages(this.getListLanguages()).map(language => ({
+  protected canChangeLanguages = signal(true);
+
+  private fromLanguages = computed((): Language[] =>
+    [
+      this.maybeFromLanguage(),
+      ...this.userLanguages(),
+      ...(this.isAllLanguages() ? this.languageService.all : []),
+    ].filter((l): l is Language => !!l)
+  );
+
+  private toLanguages = computed((): Language[] =>
+    [
+      this.maybeToLanguage(),
+      ...this.userLanguages(),
+      ...(this.isAllLanguages() ? this.languageService.all : []),
+    ].filter((l): l is Language => !!l)
+  );
+
+  private makeOptions(languages: Language[]): SelectOption[] {
+    return this.makeUniqueLanguages(languages).map(language => ({
       title: language.name,
       value: language.code,
       icon: language.flag,
       isSelected: false,
-    }))
-  );
-  protected canChangeLanguages = signal(false);
-
-  private getListLanguages(): Language[] {
-    return [
-      this.maybeFromLanguage(),
-      this.maybeToLanguage(),
-      ...this.userLanguages(),
-      ...(this.isAllLanguages() ? this.languageService.all : []),
-    ].filter(l => !!l);
+    }));
   }
 
   private makeUniqueLanguages(languages: Language[]) {
@@ -78,7 +86,7 @@ export class LanguageSwitcherComponent {
   }
 
   protected fromOptions = computed((): SelectOption[] => {
-    const options = this.options();
+    const options = this.makeOptions(this.fromLanguages());
     const from = this.maybeFromLanguage();
     return options.map(option =>
       option.value == from?.code ? { ...option, isSelected: true } : option
@@ -86,7 +94,7 @@ export class LanguageSwitcherComponent {
   });
 
   protected toOptions = computed((): SelectOption[] => {
-    const options = this.options();
+    const options = this.makeOptions(this.toLanguages());
     const to = this.maybeToLanguage();
     return options.map(option =>
       option.value == to?.code ? { ...option, isSelected: true } : option
@@ -115,20 +123,16 @@ export class LanguageSwitcherComponent {
     this.dialogService.openWindow
       .pipe(
         takeUntilDestroyed(),
-        filter(type => type == DialogType.selectFromLanguage)
+        filter(
+          type =>
+            type == DialogType.selectFromLanguage ||
+            type == DialogType.selectToLanguage
+        )
       )
-      .subscribe(() => {
-        this.selector.setFocus('from');
-        this.canChangeLanguages.set(true);
-      });
-
-    this.dialogService.openWindow
-      .pipe(
-        takeUntilDestroyed(),
-        filter(type => type == DialogType.selectToLanguage)
-      )
-      .subscribe(() => {
-        this.selector.setFocus('to');
+      .subscribe(type => {
+        this.selector.setFocus(
+          type == DialogType.selectFromLanguage ? 'from' : 'to'
+        );
         this.canChangeLanguages.set(true);
       });
   }
