@@ -6,9 +6,12 @@ import {
   phosphorAlienLight,
   phosphorArrowsLeftRightLight,
 } from '@ng-icons/phosphor-icons/light';
+import { filter } from 'rxjs';
 import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
+import { DialogsService } from '../../shared/services/dialogs.service';
 import { LanguageService } from '../../shared/services/language.service';
 import {
+  DialogType,
   Language,
   LanguageCode,
   SelectOption,
@@ -31,6 +34,7 @@ import { SelectorComponent } from './selector/selector.component';
 })
 export class LanguageSwitcherComponent {
   private languageService = inject(LanguageService);
+  private dialogService = inject(DialogsService);
 
   private userLanguages = signal<Language[]>([]);
 
@@ -52,6 +56,7 @@ export class LanguageSwitcherComponent {
       isSelected: false,
     }))
   );
+  protected canChangeLanguages = signal(false);
 
   private getListLanguages(): Language[] {
     return [
@@ -101,6 +106,19 @@ export class LanguageSwitcherComponent {
       .pipe(takeUntilDestroyed())
       .subscribe(language => {
         this.maybeToLanguage.set(language);
+      });
+
+    this.dialogService.openWindow
+      .pipe(
+        takeUntilDestroyed(),
+        filter(
+          type =>
+            type === DialogType.selectFromLanguage ||
+            type === DialogType.selectToLanguage
+        )
+      )
+      .subscribe(() => {
+        this.canChangeLanguages.set(true);
       });
   }
 
