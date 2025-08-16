@@ -20,6 +20,7 @@ export class SelectorComponent {
   addOtherLanguages = output();
   selectFrom = output<SelectOption>();
   selectTo = output<SelectOption>();
+  phosphorArrowsLeftRightLight = phosphorArrowsLeftRightLight;
 
   protected canAddOtherLanguages = computed(
     () => this.isAllLanguages() === false

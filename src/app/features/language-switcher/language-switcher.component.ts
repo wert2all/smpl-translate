@@ -34,6 +34,7 @@ export class LanguageSwitcherComponent {
 
   private userLanguages = signal<Language[]>([]);
 
+  protected phosphorArrowsLeftRightLight = phosphorArrowsLeftRightLight;
   protected isAllLanguages = signal(false);
 
   protected maybeFromLanguage = signal<Language | null | undefined>(null);

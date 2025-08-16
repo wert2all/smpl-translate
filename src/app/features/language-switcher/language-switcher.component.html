@@ -2,13 +2,17 @@
   <div class="language-switcher flex items-center justify-between">
     @if (isDefinedLanguage()) {
       <div class="flex items-center space-x-4">
-        <app-shared-icon-button icon="flagUaSquare" />
-        <span class="cursor-pointer">ukrainian</span>
+        @if (maybeFromLanguage(); as lang) {
+          <app-shared-icon-button [icon]="lang.flag" />
+          <span class="cursor-pointer">{{ lang.name }}</span>
+        }
         <app-shared-icon-button
-          icon="phosphorArrowsLeftRightLight"
+          [icon]="phosphorArrowsLeftRightLight"
           (fire)="switchLanguage()" />
-        <span class="cursor-pointer">english</span>
-        <app-shared-icon-button icon="flagGbSquare" />
+        @if (maybeToLanguage(); as lang) {
+          <span class="cursor-pointer">{{ lang.name }}</span>
+          <app-shared-icon-button [icon]="lang.flag" />
+        }
       </div>
     } @else {
       <div class="flex items-center space-x-4">
