@@ -1,6 +1,7 @@
 export enum LanguageCode {
   ua = 'ua',
   en = 'en',
+  it = 'it',
 }
 
 export interface Language {
