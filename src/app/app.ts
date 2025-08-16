@@ -43,7 +43,7 @@ export class App {
   @HostListener('document:keydown.control.s', ['$event'])
   translate(e: Event) {
     e.preventDefault();
-    console.log('translate');
+    this.actionsService.fireAction(Action.Translate);
   }
 
   @HostListener('document:keydown', ['$event.key'])

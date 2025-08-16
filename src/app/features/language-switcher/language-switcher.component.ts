@@ -130,8 +130,6 @@ export class LanguageSwitcherComponent {
         )
       )
       .subscribe(action => {
-        console.log(Action);
-        console.log(action);
         this.selector.setFocus(
           action == Action.ChangeFromLanguage ? 'from' : 'to'
         );
