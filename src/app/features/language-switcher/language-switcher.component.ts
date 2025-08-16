@@ -112,21 +112,23 @@ export class LanguageSwitcherComponent {
   }
 
   selectFromLanguage(option: SelectOption) {
-    this.languageService.setUserFromLanguageCode(
-      this.getLanguageCode(option.value)
+    const languageCode = this.getLanguageCode(
+      option.isSelected ? null : option.value
     );
+    this.languageService.setUserFromLanguageCode(languageCode);
   }
 
   selectToLanguage(option: SelectOption) {
-    this.languageService.setUserToLanguageCode(
-      this.getLanguageCode(option.value)
+    const languageCode = this.getLanguageCode(
+      option.isSelected ? null : option.value
     );
+    this.languageService.setUserToLanguageCode(languageCode);
   }
 
-  getLanguageCode(value: string): LanguageCode {
+  getLanguageCode(value: string | null): LanguageCode | null {
     if (Object.values(LanguageCode).includes(value as LanguageCode)) {
       return value as LanguageCode;
     }
-    return LanguageCode.en;
+    return null;
   }
 }
