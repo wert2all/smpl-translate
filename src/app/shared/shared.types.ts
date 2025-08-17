@@ -17,11 +17,11 @@ export enum Mode {
 }
 
 export enum Action {
-  SwitchLanguage,
-  ChangeFromLanguage,
-  ChangeToLanguage,
-  Translate,
-  UpdateUserLanguages,
+  SwitchLanguage = 1,
+  ChangeFromLanguage = 2,
+  ChangeToLanguage = 3,
+  Translate = 4,
+  UpdateUserLanguages = 5,
 }
 
 export interface Mapping {
