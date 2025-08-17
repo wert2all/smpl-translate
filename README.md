@@ -1,6 +1,6 @@
-# SmplTranslate
+# SmpliVerba
 
-SmplTranslate is a minimalist translation application built with [Angular](https://angular.dev/). The goal of this project is to provide a simple, fast, and intuitive interface for translating text. It features a clean, uncluttered UI and supports keyboard shortcuts for a more efficient workflow. The application is designed to be straightforward, focusing on the core functionality of translation without unnecessary distractions.
+SimpliVerba is a minimalist translation application built with [Angular](https://angular.dev/). The goal of this project is to provide a simple, fast, and intuitive interface for translating text. It features a clean, uncluttered UI and supports keyboard shortcuts for a more efficient workflow. The application is designed to be straightforward, focusing on the core functionality of translation without unnecessary distractions.
 
 ## Features
 
