@@ -135,6 +135,19 @@ export class LanguageSwitcherComponent {
         );
         this.canChangeLanguages.set(true);
       });
+
+    this.actionService.actions
+      .pipe(
+        takeUntilDestroyed(),
+        filter(action => action == Action.SwitchLanguage)
+      )
+      .subscribe(() => {
+        const from = this.maybeFromLanguage()?.code || null;
+        const to = this.maybeToLanguage()?.code || null;
+
+        this.languageService.setUserFromLanguageCode(to);
+        this.languageService.setUserToLanguageCode(from);
+      });
   }
 
   switchLanguage() {
