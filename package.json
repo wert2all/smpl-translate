@@ -12,6 +12,7 @@
     "lint:eslint": "ng lint",
     "format": "prettier . --write"
   },
+  "packageManager": "pnpm@10.14.0",
   "private": true,
   "dependencies": {
     "@angular/common": "^20.1.7",
