@@ -1,21 +1,25 @@
 <div class="border-1 p-4">
-  <div class="language-switcher flex items-center justify-between">
+  <div class="language-switcher grid grid-cols-12">
     @if (isDefinedLanguage()) {
-      <div class="flex items-center space-x-4">
-        @if (maybeFromLanguage(); as lang) {
-          <app-shared-icon-button [icon]="lang.flag" />
+      @if (maybeFromLanguage(); as lang) {
+        <div class="col-span-5 flex justify-end">
           <span class="cursor-pointer">{{ lang.name }}</span>
-        }
+          <app-shared-icon-button [icon]="lang.flag" />
+        </div>
+      }
+      <div class="col-span-2 flex justify-center">
         <app-shared-icon-button
           [icon]="phosphorArrowsLeftRightLight"
           (fire)="switchLanguage()" />
-        @if (maybeToLanguage(); as lang) {
-          <span class="cursor-pointer">{{ lang.name }}</span>
-          <app-shared-icon-button [icon]="lang.flag" />
-        }
       </div>
+      @if (maybeToLanguage(); as lang) {
+        <div class="col-span-5 flex justify-start">
+          <app-shared-icon-button [icon]="lang.flag" />
+          <span class="cursor-pointer">{{ lang.name }}</span>
+        </div>
+      }
     } @else {
-      <div class="flex items-center space-x-4">
+      <div class="col-span-12 flex">
         <app-shared-icon-button [icon]="phosphorAlienLight" />
         <span>will detect language</span>
       </div>
