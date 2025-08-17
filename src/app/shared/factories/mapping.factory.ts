@@ -29,6 +29,11 @@ export class MappingFactory {
   private createSpaceMenu(): Mapping[] {
     return [
       {
+        keys: ['t'],
+        description: 'translate',
+        action: Action.Translate,
+      },
+      {
         keys: ['l'],
         description: 'language',
         mapping: this.createLanguageManu(),
