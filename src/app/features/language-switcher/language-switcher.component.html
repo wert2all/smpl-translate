@@ -1,21 +1,36 @@
 <div class="border-1 p-4">
-  <div class="language-switcher flex items-center justify-between">
+  <div class="language-switcher grid grid-cols-12">
     @if (isDefinedLanguage()) {
-      <div class="flex items-center space-x-4">
-        @if (maybeFromLanguage(); as lang) {
-          <app-shared-icon-button [icon]="lang.flag" />
+      @if (maybeFromLanguage(); as lang) {
+        <div
+          (click)="fireAction(changeFromAction)"
+          (keypress.space)="fireAction(changeFromAction)"
+          (keypress.space)="fireAction(changeFromAction)"
+          class="col-span-5 flex justify-end"
+          tabindex="1">
           <span class="cursor-pointer">{{ lang.name }}</span>
-        }
+          <app-shared-icon-button [icon]="lang.flag" />
+        </div>
+      }
+      <div class="col-span-2 flex justify-center">
         <app-shared-icon-button
+          tabindex="1"
           [icon]="phosphorArrowsLeftRightLight"
-          (fire)="switchLanguage()" />
-        @if (maybeToLanguage(); as lang) {
-          <span class="cursor-pointer">{{ lang.name }}</span>
-          <app-shared-icon-button [icon]="lang.flag" />
-        }
+          (fire)="fireAction(switchAction)" />
       </div>
+      @if (maybeToLanguage(); as lang) {
+        <div
+          (click)="fireAction(changeFromAction)"
+          (keypress.space)="fireAction(changeFromAction)"
+          (keypress.space)="fireAction(changeFromAction)"
+          class="col-span-5 flex justify-start"
+          tabindex="1">
+          <app-shared-icon-button [icon]="lang.flag" />
+          <span class="cursor-pointer">{{ lang.name }}</span>
+        </div>
+      }
     } @else {
-      <div class="flex items-center space-x-4">
+      <div class="col-span-12 flex">
         <app-shared-icon-button [icon]="phosphorAlienLight" />
         <span>will detect language</span>
       </div>
@@ -24,7 +39,7 @@
   <app-language-switcher-selector
     #selector
     [class.hidden]="!canChangeLanguages()"
-    (switchLanguages)="switchLanguage()"
+    (switchLanguages)="fireAction(switchAction)"
     (addOtherLanguages)="addOtherLanguages()"
     (selectFrom)="selectFromLanguage($event)"
     (selectTo)="selectToLanguage($event)"

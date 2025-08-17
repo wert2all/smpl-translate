@@ -55,6 +55,10 @@ export class LanguageSwitcherComponent {
   protected phosphorArrowsLeftRightLight = phosphorArrowsLeftRightLight;
   protected phosphorAlienLight = phosphorAlienLight;
 
+  protected switchAction = Action.SwitchLanguage;
+  protected changeFromAction = Action.ChangeFromLanguage;
+  protected changeToAction = Action.ChangeToLanguage;
+
   protected isAllLanguages = signal(false);
 
   protected maybeFromLanguage = signal<Language | null | undefined>(null);
@@ -150,10 +154,6 @@ export class LanguageSwitcherComponent {
       });
   }
 
-  switchLanguage() {
-    this.actionService.fireAction(Action.SwitchLanguage);
-  }
-
   addOtherLanguages() {
     this.isAllLanguages.set(true);
   }
@@ -174,6 +174,10 @@ export class LanguageSwitcherComponent {
 
   closeSelector() {
     this.canChangeLanguages.set(false);
+  }
+
+  fireAction(action: Action) {
+    this.actionService.fireAction(action);
   }
 
   @HostListener('window:keydown.escape')
