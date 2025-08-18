@@ -100,6 +100,6 @@ export const createSuccessState = <T>(data: T): State<T> => ({
 
 export interface TranslationResult {
   text: string;
-  from: LanguageCode;
-  to: LanguageCode;
+  from: LanguageCode | undefined;
+  to: LanguageCode | undefined;
 }
