@@ -1,12 +1,12 @@
 <div class="border-1 p-4">
-  <div class="language-switcher grid grid-cols-12">
+  <div class="language-switcher flex flex-col sm:grid sm:grid-cols-12">
     @if (isDefinedLanguage()) {
       @if (maybeFromLanguage(); as lang) {
         <div
           (click)="fireAction(changeFromAction)"
           (keypress.space)="fireAction(changeFromAction)"
           (keypress.space)="fireAction(changeFromAction)"
-          class="col-span-5 flex justify-end"
+          class="col-span-5 flex justify-center sm:justify-end"
           tabindex="1">
           <span class="cursor-pointer">{{ lang.name }}</span>
           <app-shared-icon-button [icon]="lang.flag" />
@@ -23,14 +23,14 @@
           (click)="fireAction(changeFromAction)"
           (keypress.space)="fireAction(changeFromAction)"
           (keypress.space)="fireAction(changeFromAction)"
-          class="col-span-5 flex justify-start"
+          class="col-span-5 flex justify-center sm:justify-start"
           tabindex="1">
           <app-shared-icon-button [icon]="lang.flag" />
           <span class="cursor-pointer">{{ lang.name }}</span>
         </div>
       }
     } @else {
-      <div class="col-span-12 flex">
+      <div class="col-span-12 flex justify-center">
         <app-shared-icon-button [icon]="phosphorAlienLight" />
         <span>will detect language</span>
       </div>
