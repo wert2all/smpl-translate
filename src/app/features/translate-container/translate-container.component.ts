@@ -6,10 +6,17 @@ import { AlertComponent } from '../../shared/components/alert/alert.component';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { SpacerComponent } from '../../shared/components/spacer/spacer.component';
 import { ModeService } from '../../shared/services/mode.service';
-import { createInitialState, Mode, State } from '../../shared/shared.types';
+import {
+  Action,
+  createInitialState,
+  Mode,
+  State,
+} from '../../shared/shared.types';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
+import { filter } from 'rxjs';
 import { dumpInput } from '../../shared/dump.types';
+import { ActionsService } from '../../shared/services/actions.service';
 import { LanguageSwitcherComponent } from './../language-switcher/language-switcher.component';
 import { InputContainerComponent } from './input-container/input-container.component';
 import { TranslationComponent } from './translation/translation.component';
@@ -31,6 +38,7 @@ import { TranslationComponent } from './translation/translation.component';
 })
 export class TranslateContainerComponent {
   private modeService = inject(ModeService);
+  private actionsService = inject(ActionsService);
 
   protected inputString = signal(dumpInput);
   protected height = signal<number | null>(null);
@@ -61,9 +69,22 @@ export class TranslateContainerComponent {
     this.modeService.mode.pipe(takeUntilDestroyed()).subscribe(mode => {
       this.setInputMode.set(mode == Mode.insert);
     });
+
+    this.actionsService.actions
+      .pipe(
+        takeUntilDestroyed(),
+        filter(action => action == Action.Translate)
+      )
+      .subscribe(() => {
+        console.log('translate');
+      });
   }
 
   protected switchToInputMode() {
     this.modeService.update(Mode.insert);
+  }
+
+  protected translate() {
+    this.actionsService.fireAction(Action.Translate);
   }
 }

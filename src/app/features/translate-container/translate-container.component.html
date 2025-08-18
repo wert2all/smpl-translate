@@ -6,7 +6,8 @@
     [inputString]="inputString()"
     [setInputMode]="setInputMode()"
     (changeHeight)="height.set($event)"
-    (activateInputMode)="switchToInputMode()" />
+    (activateInputMode)="switchToInputMode()"
+    (translate)="translate()" />
   <app-shared-spacer multiplexor="2" />
   @if (loading()) {
     <app-shared-loader />
