@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { GeminiFactory } from '../factories/gemini.factory';
 import {
   createFailureState,
   createInitialState,
   createLoadingState,
+  createSuccessState,
   Language,
   State,
   TranslationResult,
@@ -11,24 +13,39 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class TranslateService {
+  private model = inject(GeminiFactory).create('gemini-2.5-flash');
+
   state = new BehaviorSubject<State<TranslationResult>>(
     createInitialState() as State<TranslationResult>
   );
 
-  translate(
+  async translate(
     text: string,
     from: Language | undefined,
     to: Language | undefined
   ) {
     this.state.next(createLoadingState() as State<TranslationResult>);
-    setTimeout(() => {
+    try {
+      const prompt = `Translate from ${from?.name} to ${to?.name}: ${text}`;
+
+      // To generate text output, call generateContent with the text input
+      const result = await this.model.generateContent(prompt);
+
+      const response = result.response;
+      const translatedText = response.text();
+
       this.state.next(
-        createFailureState(
-          new Error(
-            `could not translate '${text}' from ${from?.name} to ${to?.name} `
-          )
-        ) as State<TranslationResult>
+        createSuccessState<TranslationResult>({
+          text: translatedText,
+          from: from?.code,
+          to: to?.code,
+        })
       );
-    }, 1000);
+    } catch (e) {
+      console.log(e);
+      this.state.next(
+        createFailureState(new Error(e as string)) as State<TranslationResult>
+      );
+    }
   }
 }
