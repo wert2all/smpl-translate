@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { provideIcons } from '@ng-icons/core';
 import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
 import { AlertComponent } from '../../shared/components/alert/alert.component';
@@ -36,6 +36,7 @@ export class TranslateContainerComponent {
   protected mode = toSignal(this.modeService.mode, {
     initialValue: Mode.insert,
   });
+  protected setInputMode = signal(true);
 
   protected translateState = computed((): State => createInitialState());
 
@@ -55,11 +56,13 @@ export class TranslateContainerComponent {
       : null;
   });
 
-  onFocus() {
-    this.modeService.update(Mode.insert);
+  constructor() {
+    this.modeService.mode.pipe(takeUntilDestroyed()).subscribe(mode => {
+      this.setInputMode.set(mode == Mode.insert);
+    });
   }
 
-  unFocus() {
-    this.modeService.update(Mode.normal);
+  protected switchToInputMode() {
+    this.modeService.update(Mode.insert);
   }
 }

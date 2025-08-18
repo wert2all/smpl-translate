@@ -1,7 +1,7 @@
 import { Component, HostListener, inject, ViewChild } from '@angular/core';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { filter } from 'rxjs';
+import { filter, Subject, withLatestFrom } from 'rxjs';
 import { TranslateContainerComponent } from './features/translate-container/translate-container.component';
 import { UserLanguagesComponent } from './features/user-languages/user-languages.component';
 import { ActionsService } from './shared/services/actions.service';
@@ -24,6 +24,8 @@ export class App {
   private languageService = inject(LanguageService);
   private actionsService = inject(ActionsService);
 
+  private switchInsertMode = new Subject<void>();
+
   constructor() {
     this.actionsService.actions
       .pipe(
@@ -33,10 +35,23 @@ export class App {
       .subscribe(() => {
         this.showUserLanguages();
       });
+
+    this.switchInsertMode
+      .pipe(takeUntilDestroyed(), withLatestFrom(this.modeService.mode))
+      .subscribe(([, mode]) => {
+        if (mode == Mode.normal) {
+          this.modeService.update(Mode.insert);
+        }
+      });
+  }
+
+  @HostListener('document:keydown.i')
+  handleIPress() {
+    this.switchInsertMode.next();
   }
 
   @HostListener('document:keydown.escape')
-  handleKeyboardEvent() {
+  handleEscPress() {
     this.modeService.update(Mode.normal);
   }
 
@@ -47,7 +62,7 @@ export class App {
   }
 
   @HostListener('document:keydown', ['$event.key'])
-  onSpacePress(key: string) {
+  handleSpacePress(key: string) {
     this.mappingService.pressKey(key);
   }
 

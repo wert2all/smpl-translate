@@ -4,9 +4,9 @@
   <app-shared-spacer />
   <app-input-container
     [inputString]="inputString()"
+    [setInputMode]="setInputMode()"
     (changeHeight)="height.set($event)"
-    (unFocus)="unFocus()"
-    (typed)="onFocus()" />
+    (activateInputMode)="switchToInputMode()" />
   <app-shared-spacer multiplexor="2" />
   @if (loading()) {
     <app-shared-loader />
