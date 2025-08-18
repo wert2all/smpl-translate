@@ -23,6 +23,8 @@ export class MappingFactory {
   private createNormalMenu(): Mapping[] {
     return [
       { keys: ['space'], description: 'menu', mapping: this.createSpaceMenu() },
+      { keys: ['ctrl', 's'], description: 'translate' },
+      { keys: ['i'], description: 'input mode' },
     ];
   }
 
