@@ -97,3 +97,9 @@ export const createSuccessState = <T>(data: T): State<T> => ({
   type: 'success',
   data,
 });
+
+export interface TranslationResult {
+  text: string;
+  from: LanguageCode;
+  to: LanguageCode;
+}
