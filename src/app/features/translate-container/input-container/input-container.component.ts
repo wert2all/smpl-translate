@@ -41,6 +41,7 @@ export class InputContainerComponent implements AfterViewInit {
 
   changeHeight = output<number>();
   activateInputMode = output();
+  translate = output();
 
   protected phosphorArrowCircleDownRightLight =
     phosphorArrowCircleDownRightLight;
