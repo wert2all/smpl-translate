@@ -12,13 +12,12 @@ export class TextareaComponent {
   @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
 
   text = input<string>();
-  rows = input<number>(5);
+  disabled = input<boolean>(false);
 
   changeHeight = output<number>();
-  unFocus = output<void>();
-  typed = output<void>();
+  activated = output();
 
-  resizeEvent(size: TextAreaSize) {
+  protected resizeEvent(size: TextAreaSize) {
     this.changeHeight.emit(size.height);
   }
 

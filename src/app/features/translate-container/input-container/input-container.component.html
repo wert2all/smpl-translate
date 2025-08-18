@@ -1,13 +1,13 @@
-<div class="relative">
+<div class="relative" [class.disabled]="isDisabledInput()">
   <app-shared-title>
     <ng-icon name="phosphorArticleNyTimesLight" />
     text
   </app-shared-title>
   <app-shared-textarea
     [text]="inputString()"
+    [disabled]="isDisabledInput()"
     (changeHeight)="changeHeight.emit($event)"
-    (unFocus)="unFocus.emit()"
-    (typed)="typed.emit()" />
+    (activated)="activateInputMode.emit()" />
   <app-shared-icon-button
     [isPrimary]="true"
     class="absolute right-4 bottom-0 m-1"

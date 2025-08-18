@@ -1,6 +1,8 @@
 import {
   AfterViewInit,
   Component,
+  computed,
+  effect,
   input,
   output,
   ViewChild,
@@ -17,6 +19,7 @@ import { TitleComponent } from '../../../shared/components/title/title.component
 @Component({
   selector: 'app-input-container',
   templateUrl: './input-container.component.html',
+  styleUrl: './input-container.component.scss',
   imports: [
     TextareaComponent,
     IconButtonComponent,
@@ -31,17 +34,30 @@ import { TitleComponent } from '../../../shared/components/title/title.component
   ],
 })
 export class InputContainerComponent implements AfterViewInit {
-  @ViewChild(TextareaComponent) textarea!: TextareaComponent;
+  @ViewChild(TextareaComponent) textarea: TextareaComponent | null = null;
 
   inputString = input<string>();
-  changeHeight = output<number>();
-  unFocus = output<void>();
-  typed = output<void>();
+  setInputMode = input<boolean>(false);
 
-  phosphorArrowCircleDownRightLight = phosphorArrowCircleDownRightLight;
-  phosphorArticleNyTimesLight = phosphorArticleNyTimesLight;
+  changeHeight = output<number>();
+  activateInputMode = output();
+
+  protected phosphorArrowCircleDownRightLight =
+    phosphorArrowCircleDownRightLight;
+  protected phosphorArticleNyTimesLight = phosphorArticleNyTimesLight;
+
+  protected isDisabledInput = computed(() => !this.setInputMode());
 
   ngAfterViewInit() {
-    this.textarea.focus();
+    this.textarea?.focus();
+  }
+
+  constructor() {
+    effect(() => {
+      const isInputMode = !this.isDisabledInput();
+      if (isInputMode) {
+        this.textarea?.focus();
+      }
+    });
   }
 }

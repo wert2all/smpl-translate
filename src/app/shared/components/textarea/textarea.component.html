@@ -1,9 +1,10 @@
 <textarea
   #textarea
   class="w-full pb-4 focus:outline-none"
-  [rows]="rows()"
+  rows="5"
+  [attr.readonly]="disabled() ? true : null"
   (resized)="resizeEvent($event)"
-  (focusout)="unFocus.emit()"
-  (focus)="typed.emit()"
+  (focus)="activated.emit()"
+  (click)="activated.emit()"
   >{{ text() }}</textarea
 >

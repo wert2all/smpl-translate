@@ -1,0 +1,5 @@
+@use '../../../../css/variables.scss' as *;
+
+.disabled {
+  background-color: $input-zebra-bg-color;
+}
