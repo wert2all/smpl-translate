@@ -27,22 +27,16 @@ export class TranslateService {
     this.state.next(createLoadingState() as State<TranslationResult>);
     try {
       const prompt = `Translate from ${from?.name} to ${to?.name}: ${text}`;
-
-      // To generate text output, call generateContent with the text input
       const result = await this.model.generateContent(prompt);
-
-      const response = result.response;
-      const translatedText = response.text();
 
       this.state.next(
         createSuccessState<TranslationResult>({
-          text: translatedText,
+          text: result.response.text(),
           from: from?.code,
           to: to?.code,
         })
       );
     } catch (e) {
-      console.log(e);
       this.state.next(
         createFailureState(new Error(e as string)) as State<TranslationResult>
       );

@@ -72,8 +72,8 @@ export class TranslateContainerComponent {
 
   protected translated = computed((): string | null => {
     const state = this.translateState();
-    return state.type == 'success' && typeof state.data === 'string'
-      ? state.data
+    return state.type == 'success' && typeof state.data.text === 'string'
+      ? state.data.text
       : null;
   });
 
