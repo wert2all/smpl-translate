@@ -13,6 +13,9 @@ export class GeminiFactory {
   create(model: string): GenerativeModel {
     const firebase = initializeApp(environment.services.firebase);
     const ai = getAI(firebase, { backend: new GoogleAIBackend() });
-    return getGenerativeModel(ai, { model: model });
+
+    return getGenerativeModel(ai, {
+      model: model,
+    });
   }
 }
