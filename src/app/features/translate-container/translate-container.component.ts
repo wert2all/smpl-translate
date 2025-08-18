@@ -9,6 +9,7 @@ import { ModeService } from '../../shared/services/mode.service';
 import { createInitialState, Mode, State } from '../../shared/shared.types';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
+import { dumpInput } from '../../shared/dump.types';
 import { LanguageSwitcherComponent } from './../language-switcher/language-switcher.component';
 import { InputContainerComponent } from './input-container/input-container.component';
 import { TranslationComponent } from './translation/translation.component';
@@ -31,7 +32,7 @@ import { TranslationComponent } from './translation/translation.component';
 export class TranslateContainerComponent {
   private modeService = inject(ModeService);
 
-  protected inputString = signal('');
+  protected inputString = signal(dumpInput);
   protected height = signal<number | null>(null);
   protected mode = toSignal(this.modeService.mode, {
     initialValue: Mode.insert,
