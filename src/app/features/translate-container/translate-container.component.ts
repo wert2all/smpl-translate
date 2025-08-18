@@ -9,14 +9,18 @@ import { ModeService } from '../../shared/services/mode.service';
 import {
   Action,
   createInitialState,
+  Language,
   Mode,
   State,
+  TranslationResult,
 } from '../../shared/shared.types';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
 import { filter } from 'rxjs';
 import { dumpInput } from '../../shared/dump.types';
 import { ActionsService } from '../../shared/services/actions.service';
+import { LanguageService } from '../../shared/services/language.service';
+import { TranslateService } from '../../shared/services/translate.service';
 import { LanguageSwitcherComponent } from './../language-switcher/language-switcher.component';
 import { InputContainerComponent } from './input-container/input-container.component';
 import { TranslationComponent } from './translation/translation.component';
@@ -39,15 +43,23 @@ import { TranslationComponent } from './translation/translation.component';
 export class TranslateContainerComponent {
   private modeService = inject(ModeService);
   private actionsService = inject(ActionsService);
+  private translationService = inject(TranslateService);
+  private languagesService = inject(LanguageService);
 
   protected inputString = signal(dumpInput);
   protected height = signal<number | null>(null);
+
+  private fromLanguage = signal<Language | undefined>(undefined);
+  private toLanguage = signal<Language | undefined>(undefined);
+
   protected mode = toSignal(this.modeService.mode, {
     initialValue: Mode.insert,
   });
   protected setInputMode = signal(true);
 
-  protected translateState = computed((): State => createInitialState());
+  protected translateState = toSignal(this.translationService.state, {
+    initialValue: createInitialState() as State<TranslationResult>,
+  });
 
   protected loading = computed(() => this.translateState().type == 'loading');
 
@@ -70,13 +82,28 @@ export class TranslateContainerComponent {
       this.setInputMode.set(mode == Mode.insert);
     });
 
+    this.languagesService.userFromLanguage
+      .pipe(takeUntilDestroyed())
+      .subscribe(language => {
+        this.fromLanguage.set(language);
+      });
+    this.languagesService.userToLanguage
+      .pipe(takeUntilDestroyed())
+      .subscribe(language => {
+        this.toLanguage.set(language);
+      });
+
     this.actionsService.actions
       .pipe(
         takeUntilDestroyed(),
         filter(action => action == Action.Translate)
       )
       .subscribe(() => {
-        console.log('translate');
+        this.translationService.translate(
+          this.inputString(),
+          this.fromLanguage(),
+          this.toLanguage()
+        );
       });
   }
 
