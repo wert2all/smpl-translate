@@ -26,6 +26,10 @@ export class TranslateService {
     from: Language | undefined,
     to: Language | undefined
   ) {
+    const debug: Record<string, unknown> = {
+      text: text,
+      prompt: null,
+    };
     this.state.next(createLoadingState() as State<TranslationResult>);
     if (to) {
       try {
@@ -33,7 +37,10 @@ export class TranslateService {
           .builder(text, to)
           .setFrom(from)
           .build();
+        debug['prompt'] = prompt;
+
         const result = await this.model.generateContent(prompt);
+        debug['result'] = result;
 
         this.state.next(
           createSuccessState<TranslationResult>({
@@ -47,6 +54,8 @@ export class TranslateService {
           createFailureState(new Error(e as string)) as State<TranslationResult>
         );
       }
+
+      console.log(debug);
     } else {
       this.state.next(
         createFailureState(
