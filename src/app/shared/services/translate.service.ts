@@ -26,44 +26,40 @@ export class TranslateService {
     from: Language | undefined,
     to: Language | undefined
   ) {
-    const debug: Record<string, unknown> = {
-      text: text,
-      prompt: null,
-    };
     this.state.next(createLoadingState() as State<TranslationResult>);
-    if (to) {
-      try {
-        const prompt = this.promptBuilder
-          .builder(text, to)
-          .setFrom(from)
-          .build();
-        debug['prompt'] = prompt;
 
-        const result = await this.model.generateContent(prompt);
-        debug['result'] = result;
-
-        this.state.next(
-          createSuccessState<TranslationResult>({
-            text: result.response.text(),
-            from: from?.code,
-            to: to?.code,
-          })
-        );
-      } catch (e) {
-        this.state.next(
-          createFailureState(new Error(e as string)) as State<TranslationResult>
-        );
+    try {
+      if (!to) {
+        throw "It's impossible to translate without knowing the target language.";
       }
 
-      console.log(debug);
-    } else {
+      this.validateText(text);
+
+      const debug: Record<string, unknown> = { text: text };
+
+      const prompt = this.promptBuilder.builder(text, to).setFrom(from).build();
+      debug['prompt'] = prompt;
+
+      const result = await this.model.generateContent(prompt);
+      debug['result'] = result;
+
       this.state.next(
-        createFailureState(
-          new Error(
-            "It's impossible to translate without knowing the target language."
-          )
-        ) as State<TranslationResult>
+        createSuccessState<TranslationResult>({
+          text: result.response.text(),
+          from: from?.code,
+          to: to?.code,
+        })
       );
+    } catch (e) {
+      this.state.next(
+        createFailureState(new Error(e as string)) as State<TranslationResult>
+      );
+    }
+  }
+
+  private validateText(text: string) {
+    if (text.trim() == '') {
+      throw 'could not translate empty text.';
     }
   }
 }
