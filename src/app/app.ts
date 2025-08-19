@@ -6,7 +6,7 @@ import { BottomBarComponent } from './features/bottom-bar/bottom-bar.component';
 import { LanguageSwitcherComponent } from './features/language-switcher/language-switcher.component';
 import { TranslateContainerComponent } from './features/translate-container/translate-container.component';
 import { UserLanguagesComponent } from './features/user-languages/user-languages.component';
-import { SpacerComponent } from './shared/components/spacer/spacer.component';
+import { LayoutComponent } from './shared/components/layout/layout.component';
 import { ActionsService } from './shared/services/actions.service';
 import { LanguageService } from './shared/services/language.service';
 import { MappingService } from './shared/services/mapping.service';
@@ -16,13 +16,12 @@ import { Action, LanguageCode, Mode } from './shared/shared.types';
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
-  styleUrl: './app.scss',
   imports: [
     TranslateContainerComponent,
     UserLanguagesComponent,
     BottomBarComponent,
     LanguageSwitcherComponent,
-    SpacerComponent,
+    LayoutComponent,
   ],
 })
 export class App {

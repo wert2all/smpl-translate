@@ -1,0 +1,17 @@
+@use './../../../../css/variables' as *;
+
+.jetbrains-mono-400 {
+  font-family: 'JetBrains Mono', monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bg-body {
+  background-color: $body-bg-color;
+}
+
+.app_container {
+  background-color: $container-bg-color;
+  color: $container-text-color;
+}
