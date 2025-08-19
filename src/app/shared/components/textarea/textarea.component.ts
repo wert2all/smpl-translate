@@ -15,6 +15,7 @@ export class TextareaComponent {
   disabled = input<boolean>(false);
 
   changeHeight = output<number>();
+  changeValue = output<string>();
   activated = output();
 
   protected resizeEvent(size: TextAreaSize) {

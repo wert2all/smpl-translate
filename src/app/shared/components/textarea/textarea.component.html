@@ -6,5 +6,6 @@
   (resized)="resizeEvent($event)"
   (focus)="activated.emit()"
   (click)="activated.emit()"
+  (input)="changeValue.emit(textarea.value)"
   >{{ text() }}</textarea
 >

@@ -1,9 +1,9 @@
 <app-shared-spacer multiplexor="2" />
 
 <app-input-container
-  [inputString]="inputString()"
   [setInputMode]="setInputMode()"
   (changeHeight)="height.set($event)"
+  (changeValue)="changeInputValue($event)"
   (activateInputMode)="switchToInputMode()"
   (translate)="translate()" />
 <app-shared-spacer multiplexor="2" />

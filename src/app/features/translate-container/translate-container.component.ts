@@ -40,8 +40,7 @@ export class TranslateContainerComponent {
   private actionsService = inject(ActionsService);
   private translationService = inject(TranslateService);
   private languagesService = inject(LanguageService);
-
-  protected inputString = signal('');
+  private inputString = signal<string>('');
   protected height = signal<number | null>(null);
 
   private fromLanguage = signal<Language | undefined>(undefined);
@@ -103,5 +102,9 @@ export class TranslateContainerComponent {
 
   protected translate() {
     this.actionsService.fireAction(Action.Translate);
+  }
+
+  protected changeInputValue(value: string) {
+    this.inputString.set(value);
   }
 }
