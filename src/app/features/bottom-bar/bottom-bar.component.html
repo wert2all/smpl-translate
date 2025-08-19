@@ -2,7 +2,7 @@
   <div class="me-2 flex items-center">
     <app-translate-mode [mode]="mode()"></app-translate-mode>
   </div>
-  <div>
+  <div class="hidden sm:block">
     @for (mapping of mappings(); track $index) {
       <span class="me-2"></span>
       @for (key of mapping.keys; track $index) {
