@@ -114,6 +114,9 @@ export class LanguageSwitcherComponent {
       .pipe(takeUntilDestroyed())
       .subscribe(languages => {
         this.userLanguages.set(languages);
+        if (languages.length == 0) {
+          this.isAllLanguages.set(true);
+        }
       });
 
     this.languageService.userFromLanguage
