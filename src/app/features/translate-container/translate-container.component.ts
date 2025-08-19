@@ -17,7 +17,6 @@ import {
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
 import { filter } from 'rxjs';
-import { dumpInput } from '../../shared/dump.types';
 import { ActionsService } from '../../shared/services/actions.service';
 import { LanguageService } from '../../shared/services/language.service';
 import { TranslateService } from '../../shared/services/translate.service';
@@ -46,7 +45,7 @@ export class TranslateContainerComponent {
   private translationService = inject(TranslateService);
   private languagesService = inject(LanguageService);
 
-  protected inputString = signal(dumpInput);
+  protected inputString = signal('');
   protected height = signal<number | null>(null);
 
   private fromLanguage = signal<Language | undefined>(undefined);
