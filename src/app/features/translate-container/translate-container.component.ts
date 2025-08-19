@@ -14,13 +14,11 @@ import {
   State,
   TranslationResult,
 } from '../../shared/shared.types';
-import { BottomBarComponent } from '../bottom-bar/bottom-bar.component';
 
 import { filter } from 'rxjs';
 import { ActionsService } from '../../shared/services/actions.service';
 import { LanguageService } from '../../shared/services/language.service';
 import { TranslateService } from '../../shared/services/translate.service';
-import { LanguageSwitcherComponent } from './../language-switcher/language-switcher.component';
 import { InputContainerComponent } from './input-container/input-container.component';
 import { TranslationComponent } from './translation/translation.component';
 
@@ -29,13 +27,11 @@ import { TranslationComponent } from './translation/translation.component';
   templateUrl: './translate-container.component.html',
   styleUrls: ['./translate-container.component.scss'],
   imports: [
-    LanguageSwitcherComponent,
     TranslationComponent,
     SpacerComponent,
     InputContainerComponent,
     AlertComponent,
     LoaderComponent,
-    BottomBarComponent,
   ],
   viewProviders: [provideIcons({ flagUaSquare, flagGbSquare })],
 })
