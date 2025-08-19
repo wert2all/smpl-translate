@@ -36,10 +36,11 @@ import { TitleComponent } from '../../../shared/components/title/title.component
 export class InputContainerComponent implements AfterViewInit {
   @ViewChild(TextareaComponent) textarea: TextareaComponent | null = null;
 
-  inputString = input<string>();
   setInputMode = input<boolean>(false);
 
   changeHeight = output<number>();
+  changeValue = output<string>();
+
   activateInputMode = output();
   translate = output();
 
