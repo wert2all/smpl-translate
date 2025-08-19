@@ -14,7 +14,6 @@ import {
   phosphorArrowsLeftRightLight,
 } from '@ng-icons/phosphor-icons/light';
 import { filter } from 'rxjs';
-import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
 import { ActionsService } from '../../shared/services/actions.service';
 import { LanguageService } from '../../shared/services/language.service';
 import {
@@ -23,13 +22,14 @@ import {
   LanguageCode,
   SelectOption,
 } from '../../shared/shared.types';
+import { PanelComponent } from './panel/panel.component';
 import { SelectorComponent } from './selector/selector.component';
 
 @Component({
   selector: 'app-language-switcher',
   templateUrl: './language-switcher.component.html',
   styleUrl: './language-switcher.component.scss',
-  imports: [IconButtonComponent, SelectorComponent],
+  imports: [SelectorComponent, PanelComponent],
   viewProviders: [
     provideIcons({
       phosphorArrowsLeftRightLight,
@@ -52,21 +52,14 @@ export class LanguageSwitcherComponent {
     ...(this.isAllLanguages() ? this.languageService.all : []),
   ]);
 
-  protected phosphorArrowsLeftRightLight = phosphorArrowsLeftRightLight;
-  protected phosphorAlienLight = phosphorAlienLight;
-
   protected switchAction = Action.SwitchLanguage;
   protected changeFromAction = Action.ChangeFromLanguage;
   protected changeToAction = Action.ChangeToLanguage;
 
   protected isAllLanguages = signal(false);
 
-  protected maybeFromLanguage = signal<Language | null | undefined>(null);
-  protected maybeToLanguage = signal<Language | null | undefined>(null);
-
-  protected isDefinedLanguage = computed(
-    () => this.maybeFromLanguage() && this.maybeToLanguage()
-  );
+  private maybeFromLanguage = signal<Language | null | undefined>(null);
+  private maybeToLanguage = signal<Language | null | undefined>(null);
 
   protected canChangeLanguages = signal(false);
 
@@ -77,6 +70,17 @@ export class LanguageSwitcherComponent {
   protected toOptions = computed((): SelectOption[] =>
     this.createOptions(this.maybeToLanguage(), this.optionLanguages())
   );
+
+  protected panelFromView = computed(() => {
+    const title = this.maybeFromLanguage()?.name || 'will detect language';
+    const icon = this.maybeFromLanguage()?.flag || phosphorAlienLight;
+    return { title, icon };
+  });
+  protected panelToView = computed(() => {
+    const title = this.maybeToLanguage()?.name || 'no target language';
+    const icon = this.maybeToLanguage()?.flag;
+    return { title, icon };
+  });
 
   private createOptions(
     userSelected: Language | null | undefined,
