@@ -1,0 +1,32 @@
+<div class="language-switcher flex flex-col sm:grid sm:grid-cols-12">
+  <div
+    (click)="changeFrom.emit()"
+    (keypress.space)="changeFrom.emit()"
+    (keypress.space)="changeFrom.emit()"
+    class="col-span-5 flex justify-center sm:justify-end"
+    tabindex="1">
+    <span class="cursor-pointer">{{ from().title }}</span>
+    @if (from().icon; as icon) {
+      <app-shared-icon-button [icon]="icon" />
+    }
+  </div>
+
+  <div class="col-span-2 flex justify-center">
+    <app-shared-icon-button
+      tabindex="1"
+      [icon]="phosphorArrowsLeftRightLight"
+      (fire)="switchLanguage.emit()" />
+  </div>
+
+  <div
+    (click)="changeTo.emit()"
+    (keypress.space)="changeTo.emit()"
+    (keypress.space)="changeTo.emit()"
+    class="col-span-5 flex justify-center sm:justify-start"
+    tabindex="1">
+    @if (to().icon; as icon) {
+      <app-shared-icon-button [icon]="icon" />
+    }
+    <span class="cursor-pointer">{{ to().title }}</span>
+  </div>
+</div>
