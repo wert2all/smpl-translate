@@ -14,7 +14,7 @@ import {
   State,
   TranslationResult,
 } from '../../shared/shared.types';
-import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
+import { BottomBarComponent } from '../bottom-bar/bottom-bar.component';
 
 import { filter } from 'rxjs';
 import { ActionsService } from '../../shared/services/actions.service';
@@ -30,12 +30,12 @@ import { TranslationComponent } from './translation/translation.component';
   styleUrls: ['./translate-container.component.scss'],
   imports: [
     LanguageSwitcherComponent,
-    BottomBarComponent,
     TranslationComponent,
     SpacerComponent,
     InputContainerComponent,
     AlertComponent,
     LoaderComponent,
+    BottomBarComponent,
   ],
   viewProviders: [provideIcons({ flagUaSquare, flagGbSquare })],
 })
@@ -51,9 +51,6 @@ export class TranslateContainerComponent {
   private fromLanguage = signal<Language | undefined>(undefined);
   private toLanguage = signal<Language | undefined>(undefined);
 
-  protected mode = toSignal(this.modeService.mode, {
-    initialValue: Mode.insert,
-  });
   protected setInputMode = signal(true);
 
   protected translateState = toSignal(this.translationService.state, {
@@ -64,9 +61,7 @@ export class TranslateContainerComponent {
 
   protected error = computed((): string | null => {
     const state = this.translateState();
-    return state.type == 'failure' && typeof state.error.message === 'string'
-      ? state.error.message
-      : null;
+    return state.type == 'failure' ? state.error.message : null;
   });
 
   protected translated = computed((): string | null => {
