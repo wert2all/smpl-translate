@@ -1,5 +1,13 @@
 <div
   class="bg-body jetbrains-mono-400 flex h-screen items-center justify-center">
-  <app-translate-container />
+  <div
+    class="app_container w-full max-w-5xl p-4 text-gray-500 shadow-2xl sm:p-8 sm:pb-6">
+    <app-language-switcher />
+    <app-shared-spacer />
+
+    <app-translate-container />
+
+    <app-bottom-bar />
+  </div>
   <app-user-languages #settingUserLanguagesDialog />
 </div>
