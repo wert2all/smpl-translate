@@ -34,7 +34,7 @@ export class LanguageService {
       name: 'italian',
       flag: flagItSquare,
     },
-  ];
+  ].sort((a, b) => a.name.localeCompare(b.name));
 
   readonly userLanguages = new BehaviorSubject<Language[]>(
     this.readUserLanguages()
