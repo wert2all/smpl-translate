@@ -27,6 +27,9 @@ import { Language, SelectOption } from '../../shared/shared.types';
 export class UserLanguagesComponent {
   @ViewChild('userLanguagesDialog')
   private dialogElement!: ElementRef<HTMLDialogElement>;
+  @ViewChild('selector')
+  private selector!: SelectComponent;
+
   private languageService = inject(LanguageService);
 
   private userLanguages = signal<Language[]>([]);
@@ -52,6 +55,7 @@ export class UserLanguagesComponent {
 
   open() {
     this.dialogElement.nativeElement.showModal();
+    this.selector.setFocus();
   }
 
   protected save() {

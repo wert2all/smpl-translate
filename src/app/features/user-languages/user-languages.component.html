@@ -2,6 +2,7 @@
   <app-shared-dialog title="your languages">
     <div class="dialog-content">
       <app-shared-select
+        #selector
         [options]="options()"
         (toggleOption)="toggleOption($event)" />
     </div>
