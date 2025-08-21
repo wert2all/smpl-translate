@@ -8,8 +8,7 @@ import { TranslateContainerComponent } from './features/translate-container/tran
 import { UserLanguagesComponent } from './features/user-languages/user-languages.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { ActionsService } from './shared/services/actions.service';
-import { LanguageService } from './shared/services/language.service';
-import { Action, LanguageCode } from './shared/shared.types';
+import { Action } from './shared/shared.types';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +25,6 @@ export class App {
   @ViewChild('settingUserLanguagesDialog')
   settingUserLanguages!: UserLanguagesComponent;
 
-  private languageService = inject(LanguageService);
   private actionsService = inject(ActionsService);
 
   constructor() {
@@ -38,10 +36,6 @@ export class App {
       .subscribe(() => {
         this.showUserLanguages();
       });
-  }
-
-  protected saveUserLanguages(languages: LanguageCode[]) {
-    this.languageService.setUserLanguages(languages);
   }
 
   private showUserLanguages() {
