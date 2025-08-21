@@ -103,3 +103,12 @@ export interface TranslationResult {
   from: LanguageCode | undefined;
   to: LanguageCode | undefined;
 }
+
+export interface JsonAiResult {
+  result: {
+    translation: string;
+    fromLanguage: string;
+    toLanguage: string;
+    error?: string;
+  };
+}
