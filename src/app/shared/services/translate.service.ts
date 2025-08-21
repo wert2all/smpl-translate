@@ -7,6 +7,7 @@ import {
   createInitialState,
   createLoadingState,
   createSuccessState,
+  JsonAiResult,
   Language,
   State,
   TranslationResult,
@@ -41,15 +42,22 @@ export class TranslateService {
       debug['prompt'] = prompt;
 
       const result = await this.model.generateContent(prompt);
-      debug['result'] = result;
+      const jsonResult = JSON.parse(result.response.text());
 
-      this.state.next(
-        createSuccessState<TranslationResult>({
-          text: result.response.text(),
-          from: from?.code,
-          to: to?.code,
-        })
-      );
+      debug['result'] = result;
+      debug['jsonResult'] = jsonResult;
+
+      if (this.isJsonAiResult(jsonResult)) {
+        this.state.next(
+          createSuccessState<TranslationResult>({
+            text: jsonResult.result.translation,
+            from: from?.code,
+            to: to?.code,
+          })
+        );
+      } else {
+        throw 'Wrong API responce.';
+      }
     } catch (e) {
       this.state.next(
         createFailureState(new Error(e as string)) as State<TranslationResult>
@@ -61,5 +69,33 @@ export class TranslateService {
     if (text.trim() == '') {
       throw 'could not translate empty text.';
     }
+  }
+  private isJsonAiResult(value: unknown): value is JsonAiResult {
+    // Check if value is an object and not null
+    if (typeof value !== 'object' || value === null) {
+      return false;
+    }
+
+    const resultObj = value as Record<string, unknown>;
+    if (
+      typeof resultObj['result'] !== 'object' ||
+      resultObj['result'] === null
+    ) {
+      return false;
+    }
+
+    const obj = resultObj['result'] as Record<string, unknown>;
+
+    // Check required properties exist and are strings
+    if (
+      typeof obj['translation'] !== 'string' ||
+      typeof obj['fromLanguage'] !== 'string' ||
+      typeof obj['toLanguage'] !== 'string'
+    ) {
+      return false;
+    }
+
+    // Check optional error property if it exists
+    return !(obj['error'] !== undefined && typeof obj['error'] !== 'string');
   }
 }
