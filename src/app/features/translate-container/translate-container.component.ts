@@ -14,6 +14,7 @@ import {
   TranslationResult,
 } from '../../shared/shared.types';
 
+import { Clipboard } from '@angular/cdk/clipboard';
 import { filter } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { EnvironmentType } from '../../../environments/environment.types';
@@ -43,6 +44,7 @@ export class TranslateContainerComponent {
   private translationService = inject(TranslateService);
   private languagesService = inject(LanguageService);
   private notificationService = inject(NotificationService);
+  private clipboard = inject(Clipboard);
 
   protected inputText = signal<string>(
     environment.type == EnvironmentType.development ? dumpInput : ''
@@ -100,7 +102,15 @@ export class TranslateContainerComponent {
           this.toLanguage()
         );
       });
-
+    this.actionsService.actions
+      .pipe(filter(action => action == Action.YankTranslation))
+      .subscribe(() => {
+        const translated = this.translated();
+        if (translated) {
+          this.clipboard.copy(translated);
+          this.notificationService.sendSuccess('Translation copied.');
+        }
+      });
     effect(() => {
       const error = this.error();
       if (error) {

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@angular/cdk':
+        specifier: ^20.2.0
+        version: 20.2.0(@angular/common@20.2.1(@angular/core@20.2.1(@angular/compiler@20.2.1)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.2.1(@angular/compiler@20.2.1)(rxjs@7.8.2))(rxjs@7.8.2)
       '@angular/common':
         specifier: ^20.2.1
         version: 20.2.1(@angular/core@20.2.1(@angular/compiler@20.2.1)(rxjs@7.8.2))(rxjs@7.8.2)
@@ -305,6 +308,13 @@ packages:
         optional: true
       vitest:
         optional: true
+
+  '@angular/cdk@20.2.0':
+    resolution: {integrity: sha512-BZkhRMr3nEOHHCzEgKZM537G4aq0VAwoejhYn7oIvY0UU+arHKz+U7Gc44KH5GaAgVLojtJtkFXsArifzYUwzw==}
+    peerDependencies:
+      '@angular/common': ^20.0.0 || ^21.0.0
+      '@angular/core': ^20.0.0 || ^21.0.0
+      rxjs: ^6.5.3 || ^7.4.0
 
   '@angular/cli@20.2.0':
     resolution: {integrity: sha512-p62hkuQOxf5kJsVq6AT7B1MHYo1uPGoZV4lf47qOrLjl0WANwfxEgLvyuVgL47ylnINbPnITeeUdoadVn4t1sw==}
@@ -4793,6 +4803,14 @@ snapshots:
       - terser
       - tsx
       - yaml
+
+  '@angular/cdk@20.2.0(@angular/common@20.2.1(@angular/core@20.2.1(@angular/compiler@20.2.1)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.2.1(@angular/compiler@20.2.1)(rxjs@7.8.2))(rxjs@7.8.2)':
+    dependencies:
+      '@angular/common': 20.2.1(@angular/core@20.2.1(@angular/compiler@20.2.1)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@angular/core': 20.2.1(@angular/compiler@20.2.1)(rxjs@7.8.2)
+      parse5: 8.0.0
+      rxjs: 7.8.2
+      tslib: 2.8.1
 
   '@angular/cli@20.2.0(@types/node@24.3.0)(chokidar@4.0.3)':
     dependencies:

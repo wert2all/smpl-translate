@@ -32,8 +32,8 @@ export class MappingFactory {
     return [
       {
         keys: ['t'],
-        description: 'translate',
-        action: Action.Translate,
+        description: 'translation',
+        mapping: this.createTranslationsMenu(),
       },
       {
         keys: ['l'],
@@ -45,6 +45,13 @@ export class MappingFactory {
         description: 'settings',
         mapping: this.createSettingsManu(),
       },
+    ];
+  }
+
+  private createTranslationsMenu(): Mapping[] {
+    return [
+      { keys: ['t'], description: 'translate', action: Action.Translate },
+      { keys: ['y'], description: 'yank', action: Action.YankTranslation },
     ];
   }
 
