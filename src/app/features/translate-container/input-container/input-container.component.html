@@ -4,6 +4,7 @@
     text
   </app-shared-title>
   <app-shared-textarea
+    [text]="inputText()"
     [disabled]="isDisabledInput()"
     (changeHeight)="changeHeight.emit($event)"
     (changeValue)="changeValue.emit($event)"

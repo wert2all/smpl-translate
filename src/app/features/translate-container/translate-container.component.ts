@@ -16,6 +16,9 @@ import {
 } from '../../shared/shared.types';
 
 import { filter } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { EnvironmentType } from '../../../environments/environment.types';
+import { dumpInput } from '../../shared/dump.types';
 import { ActionsService } from '../../shared/services/actions.service';
 import { LanguageService } from '../../shared/services/language.service';
 import { TranslateService } from '../../shared/services/translate.service';
@@ -40,7 +43,10 @@ export class TranslateContainerComponent {
   private actionsService = inject(ActionsService);
   private translationService = inject(TranslateService);
   private languagesService = inject(LanguageService);
-  private inputString = signal<string>('');
+
+  protected inputText = signal<string>(
+    environment.type == EnvironmentType.development ? dumpInput : ''
+  );
   protected height = signal<number | null>(null);
 
   private fromLanguage = signal<Language | undefined>(undefined);
@@ -89,7 +95,7 @@ export class TranslateContainerComponent {
       )
       .subscribe(() => {
         this.translationService.translate(
-          this.inputString(),
+          this.inputText(),
           this.fromLanguage(),
           this.toLanguage()
         );
@@ -105,6 +111,6 @@ export class TranslateContainerComponent {
   }
 
   protected changeInputValue(value: string) {
-    this.inputString.set(value);
+    this.inputText.set(value);
   }
 }
