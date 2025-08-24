@@ -112,3 +112,13 @@ export interface JsonAiResult {
     error?: string;
   };
 }
+export enum NotificationType {
+  error = 'error',
+  success = 'success',
+}
+export interface Notification {
+  uuid: string;
+  type: NotificationType;
+  message: string;
+  read: boolean;
+}

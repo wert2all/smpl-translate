@@ -1,0 +1,5 @@
+@for (notification of notifications(); track $index) {
+  <app-shared-alert
+    [message]="notification.message"
+    [type]="notification.type" />
+}
