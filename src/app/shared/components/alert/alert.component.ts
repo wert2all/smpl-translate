@@ -1,6 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { phosphorWarningCircleLight } from '@ng-icons/phosphor-icons/light';
+import { NotificationType } from '../../shared.types';
 
 @Component({
   selector: 'app-shared-alert',
@@ -16,7 +17,7 @@ import { phosphorWarningCircleLight } from '@ng-icons/phosphor-icons/light';
   styleUrl: './alert.component.scss',
 })
 export class AlertComponent {
-  type = input.required<'error' | 'success'>();
+  type = input.required<NotificationType>();
   message = input.required<string>();
 
   protected isError = computed(() => this.type() === 'error');

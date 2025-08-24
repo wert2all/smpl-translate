@@ -1,8 +1,7 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { provideIcons } from '@ng-icons/core';
 import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
-import { AlertComponent } from '../../shared/components/alert/alert.component';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { SpacerComponent } from '../../shared/components/spacer/spacer.component';
 import { ModeService } from '../../shared/services/mode.service';
@@ -21,6 +20,7 @@ import { EnvironmentType } from '../../../environments/environment.types';
 import { dumpInput } from '../../shared/dump.types';
 import { ActionsService } from '../../shared/services/actions.service';
 import { LanguageService } from '../../shared/services/language.service';
+import { NotificationService } from '../../shared/services/notification.service';
 import { TranslateService } from '../../shared/services/translate.service';
 import { InputContainerComponent } from './input-container/input-container.component';
 import { TranslationComponent } from './translation/translation.component';
@@ -33,7 +33,6 @@ import { TranslationComponent } from './translation/translation.component';
     TranslationComponent,
     SpacerComponent,
     InputContainerComponent,
-    AlertComponent,
     LoaderComponent,
   ],
   viewProviders: [provideIcons({ flagUaSquare, flagGbSquare })],
@@ -43,6 +42,7 @@ export class TranslateContainerComponent {
   private actionsService = inject(ActionsService);
   private translationService = inject(TranslateService);
   private languagesService = inject(LanguageService);
+  private notificationService = inject(NotificationService);
 
   protected inputText = signal<string>(
     environment.type == EnvironmentType.development ? dumpInput : ''
@@ -60,7 +60,7 @@ export class TranslateContainerComponent {
 
   protected loading = computed(() => this.translateState().type == 'loading');
 
-  protected error = computed((): string | null => {
+  private error = computed((): string | null => {
     const state = this.translateState();
     return state.type == 'failure' ? state.error.message : null;
   });
@@ -100,6 +100,13 @@ export class TranslateContainerComponent {
           this.toLanguage()
         );
       });
+
+    effect(() => {
+      const error = this.error();
+      if (error) {
+        this.notificationService.sendError(error);
+      }
+    });
   }
 
   protected switchToInputMode() {

@@ -4,6 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 import { BottomBarComponent } from './features/bottom-bar/bottom-bar.component';
 import { LanguageSwitcherComponent } from './features/language-switcher/language-switcher.component';
+import { NotificationComponent } from './features/notifications/notification.component';
 import { TranslateContainerComponent } from './features/translate-container/translate-container.component';
 import { UserLanguagesComponent } from './features/user-languages/user-languages.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
@@ -19,6 +20,7 @@ import { Action } from './shared/shared.types';
     BottomBarComponent,
     LanguageSwitcherComponent,
     LayoutComponent,
+    NotificationComponent,
   ],
 })
 export class App {
