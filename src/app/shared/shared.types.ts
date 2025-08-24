@@ -22,6 +22,7 @@ export enum Action {
   ChangeToLanguage = 3,
   Translate = 4,
   UpdateUserLanguages = 5,
+  YankTranslation = 6,
 }
 
 export interface Mapping {
