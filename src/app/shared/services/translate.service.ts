@@ -33,35 +33,45 @@ export class TranslateService {
       if (!to) {
         throw "It's impossible to translate without knowing the target language.";
       }
-
       this.validateText(text);
-
-      const debug: Record<string, unknown> = { text: text };
-
-      const prompt = this.promptBuilder.builder(text, to).setFrom(from).build();
-      debug['prompt'] = prompt;
-
-      const result = await this.model.generateContent(prompt);
-      const jsonResult = JSON.parse(result.response.text());
-
-      debug['result'] = result;
-      debug['jsonResult'] = jsonResult;
-
-      if (this.isJsonAiResult(jsonResult)) {
-        this.state.next(
-          createSuccessState<TranslationResult>({
-            text: jsonResult.result.translation,
-            from: from?.code,
-            to: to?.code,
-          })
-        );
-      } else {
-        throw 'Wrong API responce.';
-      }
+      this.makeRequest(text, from, to);
     } catch (e) {
+      this.createError(e);
+    }
+  }
+
+  private createError(e: unknown) {
+    this.state.next(
+      createFailureState(new Error(e as string)) as State<TranslationResult>
+    );
+  }
+
+  private async makeRequest(
+    text: string,
+    from: Language | undefined,
+    to: Language
+  ) {
+    const debug: Record<string, unknown> = { text: text };
+
+    const prompt = this.promptBuilder.builder(text, to).setFrom(from).build();
+    debug['prompt'] = prompt;
+
+    const result = await this.model.generateContent(prompt);
+    const jsonResult = JSON.parse(result.response.text());
+
+    debug['result'] = result;
+    debug['jsonResult'] = jsonResult;
+
+    if (this.isJsonAiResult(jsonResult)) {
       this.state.next(
-        createFailureState(new Error(e as string)) as State<TranslationResult>
+        createSuccessState<TranslationResult>({
+          text: jsonResult.result.translation,
+          from: from?.code,
+          to: to?.code,
+        })
       );
+    } else {
+      throw 'Wrong API responce.';
     }
   }
 
@@ -70,6 +80,7 @@ export class TranslateService {
       throw 'could not translate empty text.';
     }
   }
+
   private isJsonAiResult(value: unknown): value is JsonAiResult {
     // Check if value is an object and not null
     if (typeof value !== 'object' || value === null) {
