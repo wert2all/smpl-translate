@@ -12,11 +12,13 @@ import {
   State,
   TranslationResult,
 } from '../shared.types';
+import { Logger } from './logger.service';
 
 @Injectable({ providedIn: 'root' })
 export class TranslateService {
   private model = inject(GeminiFactory).create('gemini-2.5-flash');
   private promptBuilder = inject(PromptFactory);
+  private logger = inject(Logger);
 
   state = new BehaviorSubject<State<TranslationResult>>(
     createInitialState() as State<TranslationResult>
@@ -51,16 +53,14 @@ export class TranslateService {
     from: Language | undefined,
     to: Language
   ) {
-    const debug: Record<string, unknown> = { text: text };
-
     const prompt = this.promptBuilder.builder(text, to).setFrom(from).build();
-    debug['prompt'] = prompt;
+    this.logger.log(this, 'prompt', prompt);
 
     const result = await this.model.generateContent(prompt);
     const jsonResult = JSON.parse(result.response.text());
 
-    debug['result'] = result;
-    debug['jsonResult'] = jsonResult;
+    this.logger.log(this, 'result', result);
+    this.logger.log(this, 'jsonResult', jsonResult);
 
     if (this.isJsonAiResult(jsonResult)) {
       this.state.next(
@@ -70,6 +70,8 @@ export class TranslateService {
           to: to?.code,
         })
       );
+
+      this.logger.show();
     } else {
       throw 'Wrong API responce.';
     }
