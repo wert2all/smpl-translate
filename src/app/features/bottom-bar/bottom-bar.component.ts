@@ -24,6 +24,8 @@ export class BottomBarComponent {
     initialValue: Mode.insert,
   });
   protected mappings = signal<Mapping[]>([]);
+  protected provider = signal('gemini');
+  protected model = signal('flash 2.5');
 
   private switchInsertMode = new Subject<void>();
 
