@@ -8,11 +8,12 @@ import { MappingService } from '../../shared/services/mapping.service';
 import { ModeService } from '../../shared/services/mode.service';
 import { Action, Mapping, Mode } from '../../shared/shared.types';
 import { ModeComponent } from '../translate-container/mode/mode.component';
+import { BottomModelView } from './model-view/model-view.component';
 
 @Component({
   selector: 'app-bottom-bar',
   templateUrl: './bottom-bar.component.html',
-  imports: [KbdComponent, ModeComponent],
+  imports: [KbdComponent, ModeComponent, BottomModelView],
 })
 export class BottomBarComponent {
   private modeService = inject(ModeService);
