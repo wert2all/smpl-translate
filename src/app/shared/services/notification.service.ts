@@ -20,10 +20,10 @@ export class NotificationService {
 
   private notify(type: NotificationType, message: string) {
     const uuid = uuidv4();
-    this.notifications.update(notifications => {
-      notifications.push({ uuid, type, message, read: false });
-      return notifications;
-    });
+    this.notifications.update(notifications => [
+      ...notifications,
+      { uuid, type, message, read: false },
+    ]);
 
     setTimeout(() => {
       this.notifications.update(notifications =>
