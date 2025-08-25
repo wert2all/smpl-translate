@@ -25,11 +25,15 @@ import { TitleComponent } from '../../../shared/components/title/title.component
   ],
 })
 export class TranslationComponent {
-  translated = input<string>();
+  translated = input<string | null | undefined>();
   updatedHeight = input<number | undefined | null>();
   phosphorClipboardTextLight = phosphorClipboardTextLight;
 
-  protected heightStyle = computed(() => {
-    return this.updatedHeight() ? `height: ${this.updatedHeight()}px;` : '';
-  });
+  protected isDisabled = computed(
+    () => !this.translated() || this.translated() == ''
+  );
+
+  protected heightStyle = computed(
+    () => `height: ${this.updatedHeight() || 200}px;`
+  );
 }

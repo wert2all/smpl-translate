@@ -4,4 +4,9 @@
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: $caret-color $background-color;
+
+  &.disabled {
+    background-color: $input-zebra-bg-color;
+    opacity: 0.3;
+  }
 }

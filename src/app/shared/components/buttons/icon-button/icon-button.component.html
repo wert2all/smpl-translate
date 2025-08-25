@@ -1,6 +1,8 @@
 <button
   class="btn flex cursor-pointer items-center rounded p-1"
   [class.primary]="isPrimary()"
+  [attr.disabled]="isDisabled() ? true : null"
+  [class.btn-disabled]="isDisabled()"
   (click)="fire.emit()">
   <ng-icon [svg]="icon()" />
 </button>

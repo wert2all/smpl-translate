@@ -14,7 +14,5 @@
   <app-shared-spacer multiplexor="2" />
 }
 
-@if (translated(); as translated) {
-  <app-translation [translated]="translated" [updatedHeight]="height()" />
-  <app-shared-spacer />
-}
+<app-translation [translated]="translated()" [updatedHeight]="height()" />
+<app-shared-spacer />
