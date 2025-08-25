@@ -12,5 +12,5 @@
       {{ mapping.description }}
     }
   </div>
-  <app-bottom-model-view provider="gemini" model="flash 2.5" />
+  <app-bottom-model-view [provider]="provider()" [model]="model()" />
 </div>
