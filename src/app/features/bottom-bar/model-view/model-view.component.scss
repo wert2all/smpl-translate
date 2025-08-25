@@ -1,0 +1,9 @@
+@use './../../../../css/variables' as *;
+
+span.letter {
+  background-color: $background-color;
+}
+
+.model {
+  color: $text-accent-color;
+}
