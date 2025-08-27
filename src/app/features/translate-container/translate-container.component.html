@@ -9,10 +9,8 @@
   (translate)="translate()" />
 <app-shared-spacer multiplexor="2" />
 
-@if (loading()) {
-  <app-shared-loader />
-  <app-shared-spacer multiplexor="2" />
-}
-
-<app-translation [translated]="translated()" [updatedHeight]="height()" />
+<app-translation
+  [translated]="translated()"
+  [updatedHeight]="height()"
+  [isLoading]="loading()" />
 <app-shared-spacer />

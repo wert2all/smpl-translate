@@ -6,7 +6,7 @@ import {
 } from '@ng-icons/phosphor-icons/light';
 import { IconButtonComponent } from '../../../shared/components/buttons/icon-button/icon-button.component';
 import { DividerComponent } from '../../../shared/components/divider/divider.component';
-import { SpacerComponent } from '../../../shared/components/spacer/spacer.component';
+import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 import { TitleComponent } from '../../../shared/components/title/title.component';
 
 @Component({
@@ -17,20 +17,22 @@ import { TitleComponent } from '../../../shared/components/title/title.component
     TitleComponent,
     NgIcon,
     DividerComponent,
-    SpacerComponent,
     IconButtonComponent,
+    LoaderComponent,
   ],
   viewProviders: [
     provideIcons({ phosphorTranslateLight, phosphorClipboardTextLight }),
   ],
 })
 export class TranslationComponent {
+  isLoading = input.required<boolean>();
+
   translated = input<string | null | undefined>();
   updatedHeight = input<number | undefined | null>();
   phosphorClipboardTextLight = phosphorClipboardTextLight;
 
   protected isDisabled = computed(
-    () => !this.translated() || this.translated() == ''
+    () => !this.translated() || this.translated() == '' || this.isLoading()
   );
 
   protected heightStyle = computed(
