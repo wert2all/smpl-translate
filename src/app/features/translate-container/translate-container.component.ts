@@ -2,7 +2,6 @@ import { Component, computed, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { provideIcons } from '@ng-icons/core';
 import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
-import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { SpacerComponent } from '../../shared/components/spacer/spacer.component';
 import { ModeService } from '../../shared/services/mode.service';
 import {
@@ -30,12 +29,7 @@ import { TranslationComponent } from './translation/translation.component';
   selector: 'app-translate-container',
   templateUrl: './translate-container.component.html',
   styleUrls: ['./translate-container.component.scss'],
-  imports: [
-    TranslationComponent,
-    SpacerComponent,
-    InputContainerComponent,
-    LoaderComponent,
-  ],
+  imports: [TranslationComponent, SpacerComponent, InputContainerComponent],
   viewProviders: [provideIcons({ flagUaSquare, flagGbSquare })],
 })
 export class TranslateContainerComponent {
