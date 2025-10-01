@@ -25,7 +25,7 @@ export class LanguageService {
       name: 'ukrainian',
       flag: flagUaSquare,
     },
-  ].sort((a, b) => a.name.localeCompare(b.name));
+  ].toSorted((a, b) => a.name.localeCompare(b.name));
 
   readonly userLanguages = new BehaviorSubject<Language[]>(
     this.readUserLanguages()
