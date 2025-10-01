@@ -1,9 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import {
-  flagGbSquare,
-  flagItSquare,
-  flagUaSquare,
-} from '@ng-icons/flag-icons/square';
+import { flagGbSquare, flagUaSquare } from '@ng-icons/flag-icons/square';
 import { BehaviorSubject } from 'rxjs';
 import { Language, LanguageCode } from '../../shared/shared.types';
 import { LocalStorageService } from './local-storage.service';
@@ -28,11 +24,6 @@ export class LanguageService {
       code: LanguageCode.ua,
       name: 'ukrainian',
       flag: flagUaSquare,
-    },
-    {
-      code: LanguageCode.it,
-      name: 'italian',
-      flag: flagItSquare,
     },
   ].sort((a, b) => a.name.localeCompare(b.name));
 
