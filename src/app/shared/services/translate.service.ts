@@ -16,7 +16,7 @@ import { Logger } from './logger.service';
 
 @Injectable({ providedIn: 'root' })
 export class TranslateService {
-  private model = inject(GeminiFactory).create('gemini-2.5-flash');
+  private model = inject(GeminiFactory).create('gemini-flash-lite-latest');
   private promptBuilder = inject(PromptFactory);
   private logger = inject(Logger);
 
